@@ -6,7 +6,7 @@ from tabulate import tabulate
 from httpx import Timeout
 
 # --- CONFIGURATION ---
-API_KEY = "AIzaSyDnYVLmgbAd28dZI-jBK3GB5uQX1OudmVs"
+API_KEY = "REDACTED"
 client = genai.Client(api_key=API_KEY)
 
 INPUT_C = "/home/saiyansai/RE/Bot/decompiled_output.c"
