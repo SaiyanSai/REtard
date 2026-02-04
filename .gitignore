@@ -1,0 +1,17 @@
+# Environment variables
+.env
+
+# Ghidra Projects and Logs
+ghidra_projects/
+ghidra_12.0.1_PUBLIC/
+ghidra_*.log
+
+# Analysis Outputs and State
+Bot/decompiled_output.c
+Bot/analysis_state.json
+Bot/boilerplate.txt
+
+# Python cache
+__pycache__/
+*.py[cod]
+.venv/
