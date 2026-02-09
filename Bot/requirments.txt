@@ -3,4 +3,6 @@ packaging==25.0
 pyghidra==3.0.2
 python-dotenv
 langgraph
+langgraph-checkpoint-sqlite
 langchain-google-genai
+tqdm

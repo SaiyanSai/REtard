@@ -147,7 +147,7 @@ class REOrchestrator:
         )
 
         try:
-            res = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
+            res = client.models.generate_content(model="gemini-3-flash-preview", contents=prompt)
             raw = res.text
             
             new_name = re.search(r"PROPOSED_NAME:\s*(.*)", raw).group(1).strip().replace("`", "")

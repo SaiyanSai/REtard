@@ -10,6 +10,9 @@ ghidra_*.log
 Bot/decompiled_output.c
 Bot/analysis_state.json
 Bot/boilerplate.txt
+Bot/graph_checkpoint.db
+Bot/graph_checkpoint.db-shm
+Bot/graph_checkpoint.db-wal
 
 # Python cache
 __pycache__/
