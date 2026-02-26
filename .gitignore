@@ -13,6 +13,7 @@ Bot/boilerplate.txt
 Bot/graph_checkpoint.db
 Bot/graph_checkpoint.db-shm
 Bot/graph_checkpoint.db-wal
+Bot/function_strings.json
 
 # Python cache
 __pycache__/

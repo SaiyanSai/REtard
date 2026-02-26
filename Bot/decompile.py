@@ -3,7 +3,7 @@ from pathlib import Path
 import pyghidra
 
 # 1. INITIALIZE PYGHIDRA
-GHIDRA_INSTALL = Path("/home/saiyansai/RE/ghidra_12.0.1_PUBLIC")
+GHIDRA_INSTALL = Path("ghidra_12.0.1_PUBLIC")
 os.environ["GHIDRA_INSTALL_DIR"] = str(GHIDRA_INSTALL)
 
 # start() initializes the JVM
@@ -12,7 +12,7 @@ pyghidra.start(install_dir=GHIDRA_INSTALL)
 def decompile_binary(binary_path, output_path):
     bin_path = Path(binary_path)
     # Using the RE folder for projects to keep things organized
-    project_dir = Path("/home/saiyansai/RE/ghidra_projects")
+    project_dir = Path("ghidra_projects")
     os.makedirs(project_dir, exist_ok=True)
 
     print(f"[*] Opening project at: {project_dir}")

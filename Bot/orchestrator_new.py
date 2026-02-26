@@ -17,12 +17,19 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 # Load environment variables
 load_dotenv()
 
-# Ensure we can import decompile.py
+# Ensure we can import external scripts
 sys.path.append(str(Path(__file__).parent))
+
 try:
     from decompile import decompile_binary
 except ImportError:
     print("[!] Ensure decompile.py is in the Bot folder.")
+    sys.exit(1)
+
+try:
+    from string_extract import extract_triage_data
+except ImportError:
+    print("[!] Ensure string_extract.py is in the Bot folder.")
     sys.exit(1)
 
 # --- CONFIGURATION ---
@@ -39,16 +46,14 @@ class REState(TypedDict):
     suggested_target: str 
     call_graph: Dict[str, List[str]]
     history: Annotated[List[str], operator.add]
-    phase: str # 'start', 'triage', 'analysis_loop', 'revisit', 'final_sweep', 'end'
+    phase: str 
 
 # --- 2. HELPERS ---
 def extract_xml(text: str, tag: str) -> str:
-    """Safely extracts content from XML tags."""
     match = re.search(rf'<{tag}>(.*?)</{tag}>', text, re.DOTALL)
     return match.group(1).strip() if match else ""
 
 def check_if_wrapper(name: str, body: str) -> bool:
-    """Identifies small functions calling named APIs."""
     if not name.startswith("FUN_"): return False
     lines = [l.strip() for l in body.split('\n') if l.strip() and l not in ['{', '}'] and not l.startswith(('/', '*'))]
     if len(lines) > 12: return False
@@ -59,7 +64,6 @@ def check_if_wrapper(name: str, body: str) -> bool:
     return False
 
 def save_json_state(state: REState):
-    """Legacy JSON export for readability."""
     data = {"functions": state["functions"], "symbol_table": state["symbol_table"]}
     with open(STATE_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
@@ -108,31 +112,76 @@ def triage_node(state: REState):
     
     if not pending: return {"phase": "analysis_loop"}
 
-    for name in tqdm(pending, desc="Triaging Strings"):
-        strings = re.findall(r'"(.*?)"', new_functions[name]["body"])
-        clean = [s for s in strings if len(s) > 3]
-        if not clean:
+    # --- INTEGRATION: Run PyGhidra API & String Extraction ---
+    binary = os.getenv("TARGET_BINARY")
+    strings_json = "Bot/function_strings.json"
+    
+    if binary and not Path(strings_json).exists():
+        print("[*] Running PyGhidra Cross-Referenced API & String Extraction...")
+        try:
+            extract_triage_data(binary, strings_json)
+        except Exception as e:
+            print(f"[!] Extraction failed: {e}")
+
+    # Load the pre-mapped JSON data
+    func_triage_map = {}
+    global_context = ""
+    
+    if Path(strings_json).exists():
+        with open(strings_json, "r", encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+                func_triage_map = data.get("function_map", {})
+                global_strings = data.get("global_strings", [])
+                
+                # Sort global strings by length for LLM context
+                global_strings.sort(key=len, reverse=True)
+                sample_strings = global_strings[:50] 
+                if sample_strings:
+                    global_context = f"\n[Global Binary Context (Top 50 Longest Strings)]:\n{sample_strings}\n"
+            except json.JSONDecodeError:
+                print("[!] Failed to parse function_strings.json")
+
+    for name in tqdm(pending, desc="Triaging Strings & APIs"):
+        body = new_functions[name]["body"]
+        
+        # 1. Look up the XREF strings AND APIs found by PyGhidra
+        func_data = func_triage_map.get(name, {"strings": [], "apis": []})
+        xref_strings = func_data.get("strings", [])
+        api_calls = func_data.get("apis", [])
+        
+        # 2. Still catch explicit inline strings in C code just in case
+        inline_strings = re.findall(r'"(.*?)"', body)
+        
+        # Combine strings and filter out small noise
+        all_found_strings = list(set(xref_strings + inline_strings))
+        clean_strings = [s for s in all_found_strings if len(s) > 3]
+        
+        # If the function has NO strings AND NO external API calls, it's boring math/logic. Skip LLM to save tokens.
+        if not clean_strings and not api_calls:
             new_functions[name]["string_score"] = 0
             continue
-        prompt = f"Rate RE importance (0-10) of strings in {name}:\n{clean}\n\nReturn: <triage><score>VALUE</score></triage>"
+            
+        prompt = (
+            f"Rate RE importance (0-10) of this function: {name}\n"
+            f"Strings Referenced: {clean_strings}\n"
+            f"Windows APIs Called: {api_calls}\n"
+            f"{global_context}\n"
+            f"Based on the global context, strings, and APIs used, how critical is this function for understanding the malware?\n"
+            f"Return: <triage><score>VALUE</score></triage>"
+        )
         try:
             res = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
             score = int(extract_xml(res.text, "score") or 0)
             new_functions[name]["string_score"] = score
-            tqdm.write(f"[*] Triage: {name} | Score: {score} | Strings: {clean}")
-        except: new_functions[name]["string_score"] = 0
+            # ---> UPDATED PRINT STATEMENT <---
+            tqdm.write(f"[*] Triage: {name} | Score: {score}\n    APIs: {api_calls}\n    Strings: {clean_strings}")
+        except: 
+            new_functions[name]["string_score"] = 0
 
     return {"functions": new_functions, "phase": "analysis_loop"}
 
 def planner_node(state: REState):
-    """
-    STRICT PRIORITY: 
-    1. Suggestions (PENDING)
-    2. Trail Revisit (PARTIAL)
-    3. Wrappers (PENDING)
-    4. Strings (PENDING)
-    5. Final Sweep (PARTIAL_END)
-    """
     save_json_state(state)
     f = state["functions"]
     pending = [n for n in f if f[n]["status"] == "PENDING"]
@@ -142,29 +191,24 @@ def planner_node(state: REState):
     if not pending and not partial and not p_end:
         return {"phase": "end", "current_target": None}
 
-    # 1. Breadcrumb Suggestion
     sug = state.get("suggested_target")
     if sug and sug in pending:
         tqdm.write(f"[*] Following LLM breadcrumb: {sug}")
         return {"current_target": sug, "phase": "analysis_loop", "suggested_target": ""}
 
-    # 2. Revisit Trail Parent (PARTIAL)
     if partial:
         tqdm.write(f"[*] Trail ended. Re-evaluating partial function: {partial[0]}")
         return {"current_target": partial[0], "phase": "revisit", "suggested_target": ""}
 
-    # 3. Wrappers
     wrappers = [n for n in pending if f[n]["is_wrapper"]]
     if wrappers:
         return {"current_target": sorted(wrappers)[0], "phase": "analysis_loop", "suggested_target": ""}
 
-    # 4. String Anchor
     if pending:
         target = max(pending, key=lambda n: f[n]["string_score"])
-        tqdm.write(f"[*] Suggestion chain end. Anchoring to top string: {target} (Score: {f[target]['string_score']})")
+        tqdm.write(f"[*] Suggestion chain end. Anchoring to top priority function: {target} (Score: {f[target]['string_score']})")
         return {"current_target": target, "phase": "analysis_loop", "suggested_target": ""}
 
-    # 5. Final Sweep
     if p_end:
         if state["phase"] != "final_sweep":
             print("\n" + "="*30 + "\n[PHASE: FINAL SWEEP - RESOLVING STUBBORN FUNCTIONS]\n" + "="*30)
@@ -196,7 +240,6 @@ def analyst_node(state: REState):
         suggestion = extract_xml(res_text, "suggestion")
         summary = extract_xml(res_text, "summary")
 
-        # Validation logic
         bad_name = not name_raw or name_raw[0].upper().startswith("FUN_") or name_raw[0] == target
         
         if bad_name:
