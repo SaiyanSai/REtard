@@ -1,0 +1,1573 @@
+{
+    "FUN_010026a5": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010026f1": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002717": {
+        "score": 6,
+        "apis": [
+            "CreateCompatibleDC",
+            "LoadBitmapW",
+            "SelectObject",
+            "DeleteObject",
+            "BitBlt",
+            "DeleteDC"
+        ],
+        "strings": [
+            "FELT"
+        ]
+    },
+    "FUN_01002899": {
+        "score": 6,
+        "apis": [
+            "LoadBitmapW",
+            "CreateCompatibleDC",
+            "SelectObject",
+            "DeleteObject",
+            "BitBlt",
+            "SetPixel",
+            "MoveToEx",
+            "wsprintfW",
+            "LineTo",
+            "DeleteDC"
+        ],
+        "strings": [
+            "FELT",
+            "CARDBACK",
+            "CARD%d"
+        ]
+    },
+    "FUN_01002ab2": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002af5": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002b1a": {
+        "score": 2,
+        "apis": [
+            "GetClientRect"
+        ],
+        "strings": []
+    },
+    "FUN_01002b3b": {
+        "score": 4,
+        "apis": [
+            "GetClientRect"
+        ],
+        "strings": []
+    },
+    "FUN_01002b9a": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002bcc": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002c59": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002cf0": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002d16": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002d75": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002ddb": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002e1a": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002e59": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01002e98": {
+        "score": 4,
+        "apis": [
+            "InvalidateRect",
+            "GetClientRect"
+        ],
+        "strings": []
+    },
+    "FUN_01002f77": {
+        "score": 5,
+        "apis": [
+            "MoveWindow",
+            "SetTimer",
+            "EndDialog",
+            "PeekMessageW",
+            "GetParent",
+            "GetWindowRect"
+        ],
+        "strings": []
+    },
+    "FUN_01003038": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010030ca": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100313c": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100315b": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010031ab": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01003223": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01003259": {
+        "score": 3,
+        "apis": [
+            "GetMenu",
+            "EnableMenuItem"
+        ],
+        "strings": []
+    },
+    "FUN_0100327c": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100329a": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010032b8": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010032d6": {
+        "score": 4,
+        "apis": [
+            "BitBlt"
+        ],
+        "strings": []
+    },
+    "FUN_01003596": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010035e2": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010035fb": {
+        "score": 6,
+        "apis": [
+            "LoadStringW"
+        ],
+        "strings": []
+    },
+    "FUN_01003627": {
+        "score": 2,
+        "apis": [
+            "lstrcpyW",
+            "MessageBoxW"
+        ],
+        "strings": []
+    },
+    "FUN_01003680": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01003712": {
+        "score": 3,
+        "apis": [
+            "SetCapture",
+            "GetDC",
+            "ReleaseDC"
+        ],
+        "strings": []
+    },
+    "FUN_01003811": {
+        "score": 3,
+        "apis": [
+            "GetClientRect"
+        ],
+        "strings": []
+    },
+    "FUN_0100385f": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010038c3": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01003931": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100396e": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01003a06": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01003a90": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01003be7": {
+        "score": 3,
+        "apis": [
+            "GetMenu",
+            "EnableMenuItem"
+        ],
+        "strings": []
+    },
+    "FUN_01003c6e": {
+        "score": 3,
+        "apis": [
+            "RegCloseKey",
+            "RegOpenKeyExW",
+            "RegQueryValueExW"
+        ],
+        "strings": [
+            "WndX",
+            "SaveOnExit",
+            "PromptSave",
+            "Wins_Medium",
+            "FWinStreak_Medium",
+            "WndY",
+            "HighScore_Medium",
+            "AnimDeal",
+            "HighScore_Difficult",
+            "StreakLosses_Difficult",
+            "StreakWins_Medium",
+            "Wins_Difficult",
+            "Losses_Difficult",
+            "StreakLosses_Easy",
+            "WndWidth",
+            "Wins_Easy",
+            "FWinStreak_Difficult",
+            "NumSuits",
+            "Software\\Microsoft\\Spider",
+            "StreakCurrent_Easy",
+            "FWinStreak_Easy",
+            "LoadAtStart",
+            "WndHeight",
+            "PromptLoad",
+            "StreakCurrent_Medium",
+            "Losses_Medium",
+            "WndState",
+            "StreakLosses_Medium",
+            "StreakCurrent_Difficult",
+            "HighScore_Easy",
+            "StreakWins_Easy",
+            "Sound",
+            "Losses_Easy",
+            "StreakWins_Difficult"
+        ]
+    },
+    "FUN_0100411f": {
+        "score": 9,
+        "apis": [
+            "IsZoomed",
+            "RegSetValueExW",
+            "RegCloseKey",
+            "GetWindowRect",
+            "IsIconic",
+            "GetWindowPlacement",
+            "RegCreateKeyExW"
+        ],
+        "strings": [
+            "StreakCurrent_Difficult",
+            "HighScore_Medium",
+            "Wins_Difficult",
+            "StreakWins_Medium",
+            "Wins_Medium",
+            "StreakCurrent_Easy",
+            "WndHeight",
+            "WndWidth",
+            "WndState",
+            "SaveOnExit",
+            "HighScore_Easy",
+            "StreakCurrent_Medium",
+            "FWinStreak_Medium",
+            "StreakWins_Difficult",
+            "StreakLosses_Medium",
+            "FWinStreak_Difficult",
+            "Losses_Medium",
+            "WndX",
+            "StreakLosses_Easy",
+            "FWinStreak_Easy",
+            "Sound",
+            "WndY",
+            "Losses_Difficult",
+            "PromptSave",
+            "NumSuits",
+            "StreakLosses_Difficult",
+            "AnimDeal",
+            "StreakWins_Easy",
+            "Losses_Easy",
+            "LoadAtStart",
+            "Software\\Microsoft\\Spider",
+            "PromptLoad",
+            "Wins_Easy",
+            "HighScore_Difficult"
+        ]
+    },
+    "FUN_010044d0": {
+        "score": 7,
+        "apis": [
+            "CreateFileW",
+            "SHGetSpecialFolderPathW",
+            "lstrcatW"
+        ],
+        "strings": [
+            "spider.sav"
+        ]
+    },
+    "FUN_0100454d": {
+        "score": 2,
+        "apis": [
+            "EnableMenuItem",
+            "ReadFile",
+            "GlobalFree",
+            "DrawMenuBar",
+            "GetMenu",
+            "InvalidateRect",
+            "GetFileSize",
+            "CloseHandle",
+            "GlobalAlloc"
+        ],
+        "strings": [
+            "Spider"
+        ]
+    },
+    "FUN_010047bd": {
+        "score": 2,
+        "apis": [
+            "timeGetTime",
+            "Sleep"
+        ],
+        "strings": []
+    },
+    "FUN_010048c1": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01004a10": {
+        "score": 3,
+        "apis": [
+            "CreateSolidBrush",
+            "GetStockObject",
+            "GetTextColor",
+            "SetTextColor",
+            "DrawTextW",
+            "FillRect",
+            "wsprintfW",
+            "DeleteObject",
+            "GetBkMode",
+            "SetBkMode",
+            "OffsetRect",
+            "SetRect",
+            "FrameRect"
+        ],
+        "strings": [
+            "Moves:",
+            "Score:"
+        ]
+    },
+    "FUN_01004c2d": {
+        "score": 4,
+        "apis": [
+            "GetDC",
+            "InvalidateRect",
+            "ReleaseDC"
+        ],
+        "strings": []
+    },
+    "FUN_01004dfb": {
+        "score": 2,
+        "apis": [
+            "GdiFlush",
+            "GetDC",
+            "ReleaseDC",
+            "GetModuleHandleW",
+            "InvertRect",
+            "Sleep"
+        ],
+        "strings": []
+    },
+    "FUN_01004ef8": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01004f47": {
+        "score": 3,
+        "apis": [
+            "GetMenu",
+            "EnableMenuItem",
+            "CloseHandle"
+        ],
+        "strings": []
+    },
+    "FUN_01004fa6": {
+        "score": 7,
+        "apis": [
+            "WriteFile",
+            "CloseHandle",
+            "GlobalAlloc",
+            "GlobalFree"
+        ],
+        "strings": [
+            "Spider"
+        ]
+    },
+    "FUN_01005115": {
+        "score": 5,
+        "apis": [
+            "CreateCompatibleDC",
+            "GetDC",
+            "DeleteDC",
+            "SelectObject",
+            "DeleteObject",
+            "CreateCompatibleBitmap",
+            "InvalidateRect",
+            "ReleaseDC",
+            "GetClientRect"
+        ],
+        "strings": []
+    },
+    "FUN_01005396": {
+        "score": 2,
+        "apis": [
+            "ExcludeClipRect",
+            "RestoreDC",
+            "GetClientRect",
+            "SaveDC"
+        ],
+        "strings": []
+    },
+    "FUN_01005753": {
+        "score": 3,
+        "apis": [
+            "CreateCompatibleDC",
+            "GetDC",
+            "SelectObject",
+            "CreateCompatibleBitmap",
+            "SetCapture",
+            "GetModuleHandleW"
+        ],
+        "strings": []
+    },
+    "FUN_010059a6": {
+        "score": 7,
+        "apis": [
+            "GetDC",
+            "IntersectRect",
+            "ReleaseCapture",
+            "InvalidateRect",
+            "ReleaseDC"
+        ],
+        "strings": []
+    },
+    "FUN_01005afb": {
+        "score": 6,
+        "apis": [
+            "EnableMenuItem",
+            "DrawMenuBar",
+            "InvalidateRect",
+            "GetMenu",
+            "UpdateWindow",
+            "GetModuleHandleW"
+        ],
+        "strings": []
+    },
+    "FUN_01005ca9": {
+        "score": 4,
+        "apis": [
+            "CreateCompatibleDC",
+            "LoadBitmapW",
+            "ExcludeClipRect",
+            "wsprintfW",
+            "LineTo",
+            "DeleteDC",
+            "SelectObject",
+            "DeleteObject",
+            "BitBlt",
+            "GetPixel",
+            "SetPixel",
+            "MoveToEx",
+            "GetClientRect"
+        ],
+        "strings": [
+            "FELT",
+            "CARD%d",
+            "CARDBACK"
+        ]
+    },
+    "FUN_010061f0": {
+        "score": 3,
+        "apis": [
+            "GetMenu",
+            "EnableMenuItem",
+            "PostMessageW",
+            "GetModuleHandleW"
+        ],
+        "strings": []
+    },
+    "FUN_010062ae": {
+        "score": 3,
+        "apis": [
+            "CreateCompatibleDC",
+            "GetDC",
+            "DeleteDC",
+            "SelectObject",
+            "DeleteObject",
+            "CreateCompatibleBitmap",
+            "ReleaseDC"
+        ],
+        "strings": []
+    },
+    "FUN_010064b9": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010064d5": {
+        "score": 2,
+        "apis": [
+            "GetDC",
+            "InvalidateRect",
+            "UpdateWindow",
+            "ReleaseDC",
+            "GetModuleHandleW"
+        ],
+        "strings": []
+    },
+    "FUN_010066c9": {
+        "score": 2,
+        "apis": [],
+        "strings": [
+            "Spider"
+        ]
+    },
+    "FUN_01006732": {
+        "score": 8,
+        "apis": [
+            "IntersectRect",
+            "DeleteDC",
+            "SelectObject",
+            "DeleteObject",
+            "BitBlt",
+            "PtInRect",
+            "ReleaseCapture",
+            "InvalidateRect",
+            "PostMessageW",
+            "ReleaseDC",
+            "GetModuleHandleW"
+        ],
+        "strings": []
+    },
+    "FUN_010069b2": {
+        "score": 2,
+        "apis": [
+            "GetSubMenu",
+            "EnableMenuItem",
+            "GetDC",
+            "DrawMenuBar",
+            "InvalidateRect",
+            "GetMenu",
+            "UpdateWindow",
+            "ReleaseDC",
+            "GetModuleHandleW"
+        ],
+        "strings": [
+            "Spider"
+        ]
+    },
+    "FUN_01006bc3": {
+        "score": 7,
+        "apis": [
+            "GetDesktopWindow",
+            "SendMessageW",
+            "GetMenu",
+            "GetForegroundWindow",
+            "UpdateWindow",
+            "DefWindowProcW",
+            "lstrcpyW"
+        ],
+        "strings": [
+            "Spider",
+            "spider.chm"
+        ]
+    },
+    "FUN_01006db6": {
+        "score": 6,
+        "apis": [
+            "BeginPaint",
+            "DefWindowProcW",
+            "GetSystemMetrics",
+            "EndPaint",
+            "IsIconic",
+            "PostQuitMessage",
+            "UpdateWindow",
+            "ShowWindow",
+            "DestroyWindow"
+        ],
+        "strings": [
+            "Spider"
+        ]
+    },
+    "FUN_010070ab": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010070c0": {
+        "score": 9,
+        "apis": [
+            "WaitMessage",
+            "RegisterClassW",
+            "GetMessageW",
+            "GetVersionExA",
+            "DispatchMessageW",
+            "LoadStringA",
+            "LoadCursorW",
+            "CreateWindowExW",
+            "MessageBoxA",
+            "InitCommonControlsEx",
+            "ShowWindow",
+            "UpdateWindow",
+            "PeekMessageW",
+            "PostMessageW",
+            "TranslateMessage",
+            "TranslateAcceleratorW"
+        ],
+        "strings": [
+            "Spider",
+            "This version of Spider Solitaire is not compatible with Windows 95, Windows 98, or Windows Me."
+        ]
+    },
+    "FUN_010073a8": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007400": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100741e": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007439": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007453": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100746e": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007545": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007565": {
+        "score": 2,
+        "apis": [
+            "CreateCompatibleDC",
+            "GetStockObject",
+            "GetDC",
+            "DrawTextW",
+            "DeleteDC",
+            "SelectObject",
+            "DeleteObject",
+            "BitBlt",
+            "SetBkMode",
+            "EndDialog",
+            "ReleaseDC",
+            "lstrcpyW"
+        ],
+        "strings": [
+            "\u00a9 1998-2000 Microsoft Corporation.  \nAll rights reserved."
+        ]
+    },
+    "FUN_010076c2": {
+        "score": 3,
+        "apis": [
+            "SendMessageW",
+            "SetDlgItemTextW",
+            "wsprintfW",
+            "GetDlgItem"
+        ],
+        "strings": [
+            "Current:\t\t%d Losses",
+            "Current:\t\t%d Wins",
+            "Win Rate:\t%d %%",
+            "Most Losses:\t%d",
+            "Wins:\t\t%d",
+            "\t\t%d",
+            "Most Wins:\t%d",
+            "Losses:\t\t%d"
+        ]
+    },
+    "FUN_010078d9": {
+        "score": 0,
+        "apis": [
+            "IsDlgButtonChecked",
+            "WinHelpW",
+            "EndDialog",
+            "CheckDlgButton",
+            "lstrcpyW"
+        ],
+        "strings": [
+            "spider.hlp"
+        ]
+    },
+    "FUN_01007b06": {
+        "score": 5,
+        "apis": [
+            "IsDlgButtonChecked",
+            "CheckRadioButton",
+            "EndDialog"
+        ],
+        "strings": []
+    },
+    "FUN_01007be2": {
+        "score": 1,
+        "apis": [
+            "SendMessageW",
+            "EndDialog",
+            "GetDlgItemTextW",
+            "GetDlgItem"
+        ],
+        "strings": [
+            "Spider"
+        ]
+    },
+    "FUN_01007db9": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007dd3": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007df2": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007e16": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007e47": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007e8f": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007ecf": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007efa": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007f80": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007fb9": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01007fdf": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01008042": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01008069": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010080b1": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010080d7": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010080ff": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100812e": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100815b": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01008188": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010081ba": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010081e9": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100821a": {
+        "score": 3,
+        "apis": [
+            "BitBlt"
+        ],
+        "strings": []
+    },
+    "FUN_01008253": {
+        "score": 4,
+        "apis": [
+            "BitBlt"
+        ],
+        "strings": []
+    },
+    "FUN_01008281": {
+        "score": 2,
+        "apis": [
+            "SelectObject",
+            "DeleteObject",
+            "InvalidateRect",
+            "DeleteDC"
+        ],
+        "strings": []
+    },
+    "FUN_01008309": {
+        "score": 3,
+        "apis": [
+            "SetBkMode",
+            "timeGetTime",
+            "SetRect",
+            "lstrlenW",
+            "SetTextColor",
+            "UnionRect",
+            "DrawTextW",
+            "GetTextExtentPoint32W"
+        ],
+        "strings": []
+    },
+    "FUN_010084c1": {
+        "score": 5,
+        "apis": [
+            "timeGetTime"
+        ],
+        "strings": []
+    },
+    "FUN_01008700": {
+        "score": 2,
+        "apis": [
+            "SelectObject",
+            "DeleteObject",
+            "CreateSolidBrush",
+            "Ellipse",
+            "SetRect",
+            "UnionRect"
+        ],
+        "strings": []
+    },
+    "FUN_0100882d": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01008845": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100888a": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100889b": {
+        "score": 3,
+        "apis": [
+            "timeGetTime"
+        ],
+        "strings": []
+    },
+    "FUN_01008aec": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01008b21": {
+        "score": 5,
+        "apis": [
+            "CreateCompatibleDC",
+            "timeGetTime",
+            "GetDC",
+            "LoadStringW",
+            "SelectObject",
+            "CreateCompatibleBitmap",
+            "SetRect",
+            "MulDiv",
+            "CreateFontIndirectW",
+            "ReleaseDC",
+            "GetClientRect",
+            "GetDeviceCaps"
+        ],
+        "strings": [
+            "You Won!",
+            "Arial"
+        ]
+    },
+    "FUN_01008c80": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01008c97": {
+        "score": 4,
+        "apis": [
+            "timeGetTime"
+        ],
+        "strings": []
+    },
+    "FUN_01008d21": {
+        "score": 2,
+        "apis": [
+            "BitBlt",
+            "SetRect",
+            "UnionRect",
+            "GetDC",
+            "ReleaseDC"
+        ],
+        "strings": []
+    },
+    "FUN_01008e6b": {
+        "score": 6,
+        "apis": [
+            "UnhandledExceptionFilter",
+            "SetUnhandledExceptionFilter",
+            "GetCurrentProcess",
+            "TerminateProcess"
+        ],
+        "strings": []
+    },
+    "FUN_01008f83": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01009193": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010091a9": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010091e6": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100922c": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01009284": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100930e": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01009357": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100936b": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010093a0": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100950c": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01009560": {
+        "score": 4,
+        "apis": [
+            "GetProcAddress",
+            "GetModuleHandleA",
+            "ExitProcess"
+        ],
+        "strings": [
+            "CorExitProcess",
+            "mscoree.dll"
+        ]
+    },
+    "FUN_010095ba": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100960a": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100969a": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010096b6": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_010096d2": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01009701": {
+        "score": 8,
+        "apis": [
+            "WriteFile",
+            "GetStdHandle",
+            "GetModuleFileNameA"
+        ],
+        "strings": [
+            "Runtime Error!\\n\\nProgram: ",
+            "<program name unknown>",
+            "Microsoft Visual C++ Runtime Library",
+            "R6009\r\n- not enough space for environment\r\n",
+            "Runtime Error!\n\nProgram: "
+        ]
+    },
+    "FUN_01009aa4": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01009b12": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_01009e15": {
+        "score": 5,
+        "apis": [
+            "GetEnvironmentStrings",
+            "FreeEnvironmentStringsA",
+            "FreeEnvironmentStringsW",
+            "GetEnvironmentStringsW",
+            "GetLastError",
+            "WideCharToMultiByte"
+        ],
+        "strings": []
+    },
+    "FUN_01009f42": {
+        "score": 6,
+        "apis": [
+            "GetStdHandle",
+            "SetHandleCount",
+            "GetStartupInfoA",
+            "GetFileType"
+        ],
+        "strings": []
+    },
+    "FUN_0100a0f3": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100a112": {
+        "score": 3,
+        "apis": [
+            "HeapCreate",
+            "HeapDestroy"
+        ],
+        "strings": []
+    },
+    "FUN_0100a2aa": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100a312": {
+        "score": 5,
+        "apis": [
+            "HeapFree"
+        ],
+        "strings": []
+    },
+    "FUN_0100a354": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100a3b6": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100a40b": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100a58f": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100a773": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100a78a": {
+        "score": 5,
+        "apis": [
+            "HeapAlloc"
+        ],
+        "strings": []
+    },
+    "FUN_0100a7da": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100a80d": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100a89d": {
+        "score": 2,
+        "apis": [
+            "HeapAlloc",
+            "HeapReAlloc"
+        ],
+        "strings": []
+    },
+    "FUN_0100aa3a": {
+        "score": 2,
+        "apis": [
+            "HeapSize"
+        ],
+        "strings": []
+    },
+    "FUN_0100aa7b": {
+        "score": 3,
+        "apis": [],
+        "strings": [
+            "exp2",
+            "log10",
+            "modf",
+            "atan",
+            "exp10",
+            "floor",
+            "log2",
+            "ceil"
+        ]
+    },
+    "FUN_0100acf3": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100ad2d": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100ae70": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100ae8e": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100b28e": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100b3ee": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100b3f5": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100b7b3": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100b7ec": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100b86b": {
+        "score": 1,
+        "apis": [
+            "GetCPInfo"
+        ],
+        "strings": [
+            "    "
+        ]
+    },
+    "FUN_0100bc17": {
+        "score": 4,
+        "apis": [
+            "HeapAlloc"
+        ],
+        "strings": []
+    },
+    "FUN_0100bc6a": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100c7cb": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100c867": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100c88a": {
+        "score": 5,
+        "apis": [
+            "InterlockedExchange",
+            "VirtualQuery"
+        ],
+        "strings": []
+    },
+    "FUN_0100cc1c": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100cc58": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100cf50": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100cf6f": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100cf8e": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100cfd6": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100d020": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100d4d5": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100d70b": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100d83f": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100d879": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100d898": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100d8be": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100ddcd": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100df06": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100e13f": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100e154": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100e195": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100e2f8": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100e306": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100e5ad": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100e6ed": {
+        "score": 3,
+        "apis": [
+            "LCMapStringA",
+            "MultiByteToWideChar",
+            "LCMapStringW",
+            "GetLastError",
+            "WideCharToMultiByte"
+        ],
+        "strings": []
+    },
+    "FUN_0100eabe": {
+        "score": 4,
+        "apis": [
+            "GetStringTypeW",
+            "MultiByteToWideChar",
+            "GetStringTypeA",
+            "GetLastError"
+        ],
+        "strings": []
+    },
+    "FUN_0100ecae": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100ed15": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100ed84": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100ee6f": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100f307": {
+        "score": 1,
+        "apis": [],
+        "strings": [
+            "1#IND",
+            "1#SNAN",
+            "1#INF",
+            "1#QNAN"
+        ]
+    },
+    "FUN_0100f693": {
+        "score": 0,
+        "apis": [
+            "GetCPInfo",
+            "MultiByteToWideChar",
+            "WideCharToMultiByte"
+        ],
+        "strings": []
+    },
+    "FUN_0100f882": {
+        "score": 6,
+        "apis": [
+            "VirtualProtect",
+            "GetSystemInfo",
+            "VirtualQuery"
+        ],
+        "strings": []
+    },
+    "FUN_0100f906": {
+        "score": 0,
+        "apis": [
+            "HeapAlloc"
+        ],
+        "strings": []
+    },
+    "FUN_0100f9a6": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100fbdf": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_0100fc70": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    }
+}
