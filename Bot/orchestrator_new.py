@@ -35,8 +35,11 @@ except ImportError:
 # --- CONFIGURATION ---
 STATE_FILE = "Bot/analysis_state.json"
 CHECKPOINT_DB = "Bot/graph_checkpoint.db"
+TRIAGE_CACHE = "Bot/triage_cache.json"    
 API_KEY = os.getenv("GEMINI_API_KEY")
-client = genai.Client(api_key=API_KEY)
+
+# Standard client initialization
+client = genai.Client(api_key=API_KEY) if API_KEY else None
 
 # --- 1. STATE DEFINITION ---
 class REState(TypedDict):
@@ -112,7 +115,6 @@ def triage_node(state: REState):
     
     if not pending: return {"phase": "analysis_loop"}
 
-    # --- INTEGRATION: Run PyGhidra API & String Extraction ---
     binary = os.getenv("TARGET_BINARY")
     strings_json = "Bot/function_strings.json"
     
@@ -123,7 +125,6 @@ def triage_node(state: REState):
         except Exception as e:
             print(f"[!] Extraction failed: {e}")
 
-    # Load the pre-mapped JSON data
     func_triage_map = {}
     global_context = ""
     
@@ -134,7 +135,6 @@ def triage_node(state: REState):
                 func_triage_map = data.get("function_map", {})
                 global_strings = data.get("global_strings", [])
                 
-                # Sort global strings by length for LLM context
                 global_strings.sort(key=len, reverse=True)
                 sample_strings = global_strings[:50] 
                 if sample_strings:
@@ -142,24 +142,46 @@ def triage_node(state: REState):
             except json.JSONDecodeError:
                 print("[!] Failed to parse function_strings.json")
 
+    # Load cache
+    triage_cache = {}
+    if Path(TRIAGE_CACHE).exists():
+        with open(TRIAGE_CACHE, "r", encoding="utf-8") as f:
+            try:
+                triage_cache = json.load(f)
+            except json.JSONDecodeError:
+                pass
+
     for name in tqdm(pending, desc="Triaging Strings & APIs"):
-        body = new_functions[name]["body"]
         
-        # 1. Look up the XREF strings AND APIs found by PyGhidra
+        if name in triage_cache:
+            cache_entry = triage_cache[name]
+            if isinstance(cache_entry, int):
+                new_functions[name]["string_score"] = cache_entry
+                new_functions[name]["apis"] = []
+                new_functions[name]["strings"] = []
+            else:
+                new_functions[name]["string_score"] = cache_entry.get("score", 0)
+                new_functions[name]["apis"] = cache_entry.get("apis", [])
+                new_functions[name]["strings"] = cache_entry.get("strings", [])
+            continue
+
+        body = new_functions[name]["body"]
         func_data = func_triage_map.get(name, {"strings": [], "apis": []})
         xref_strings = func_data.get("strings", [])
         api_calls = func_data.get("apis", [])
         
-        # 2. Still catch explicit inline strings in C code just in case
         inline_strings = re.findall(r'"(.*?)"', body)
-        
-        # Combine strings and filter out small noise
         all_found_strings = list(set(xref_strings + inline_strings))
         clean_strings = [s for s in all_found_strings if len(s) > 3]
         
-        # If the function has NO strings AND NO external API calls, it's boring math/logic. Skip LLM to save tokens.
+        new_functions[name]["apis"] = api_calls
+        new_functions[name]["strings"] = clean_strings
+        
         if not clean_strings and not api_calls:
             new_functions[name]["string_score"] = 0
+            triage_cache[name] = {"score": 0, "apis": [], "strings": []}
+            with open(TRIAGE_CACHE, "w", encoding="utf-8") as f:
+                json.dump(triage_cache, f, indent=4)
             continue
             
         prompt = (
@@ -170,14 +192,34 @@ def triage_node(state: REState):
             f"Based on the global context, strings, and APIs used, how critical is this function for understanding the malware?\n"
             f"Return: <triage><score>VALUE</score></triage>"
         )
-        try:
-            res = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
-            score = int(extract_xml(res.text, "score") or 0)
-            new_functions[name]["string_score"] = score
-            # ---> UPDATED PRINT STATEMENT <---
-            tqdm.write(f"[*] Triage: {name} | Score: {score}\n    APIs: {api_calls}\n    Strings: {clean_strings}")
-        except: 
-            new_functions[name]["string_score"] = 0
+        
+        # ---> NEW: Explicit Retry Loop with Rate Limit Throttle <---
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                res = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
+                score = int(extract_xml(res.text, "score") or 0)
+                
+                new_functions[name]["string_score"] = score
+                triage_cache[name] = {"score": score, "apis": api_calls, "strings": clean_strings}
+                
+                with open(TRIAGE_CACHE, "w", encoding="utf-8") as f:
+                    json.dump(triage_cache, f, indent=4)
+                    
+                tqdm.write(f"[+] Triage: {name} | Score: {score}")
+                
+                # THROTTLE: Wait 4 seconds to stay under 15 Requests Per Minute limit
+                time.sleep(4) 
+                break # Success! Break out of the retry loop
+                
+            except Exception as e: 
+                tqdm.write(f"[!] API Error on {name} (Attempt {attempt+1}/{max_retries}): {type(e).__name__} - {str(e)}")
+                if attempt < max_retries - 1:
+                    tqdm.write("[*] Sleeping for 10 seconds before retrying...")
+                    time.sleep(10)
+                else:
+                    tqdm.write(f"[-] Max retries reached for {name}. Assigning Score 0.")
+                    new_functions[name]["string_score"] = 0
 
     return {"functions": new_functions, "phase": "analysis_loop"}
 
@@ -218,27 +260,72 @@ def planner_node(state: REState):
 
 def analyst_node(state: REState):
     target = state["current_target"]
-    code = state["functions"][target]["body"]
+    func_data = state["functions"][target]
+    code = func_data["body"]
     phase = state["phase"]
     
-    for old, new in state["symbol_table"].items():
+    apis = func_data.get("apis", [])
+    strings = func_data.get("strings", [])
+    
+    sorted_symbols = sorted(state["symbol_table"].items(), key=lambda x: len(x[0]), reverse=True)
+    for old, new in sorted_symbols:
         code = re.sub(rf'\b{old}\b', new, code)
 
-    instr = "STRICT: Return ONE logical name in <name>. NO 'FUN_' prefix. Guess if unsure."
+    if Path(STRINGS_JSON).exists():
+        with open(STRINGS_JSON, "r", encoding="utf-8") as f:
+            try:
+                data = json.load(f)
+                address_map = data.get("address_map", {})
+                
+                string_map_ints = {}
+                for addr_str, val in address_map.items():
+                    try:
+                        string_map_ints[int(addr_str, 16)] = val
+                    except ValueError: pass
+                
+                for m in re.finditer(r'0x([0-9a-fA-F]+)', code):
+                    try:
+                        addr = int(m.group(1), 16)
+                        if addr in string_map_ints:
+                            code = code.replace(m.group(0), f'"{string_map_ints[addr]}"')
+                    except: pass
+                
+                for m in re.finditer(r'([A-Za-z_]+_([0-9a-fA-F]{6,16}))\b', code):
+                    try:
+                        addr = int(m.group(2), 16)
+                        if addr in string_map_ints:
+                            code = code.replace(m.group(1), f'"{string_map_ints[addr]}"')
+                    except: pass
+            except json.JSONDecodeError:
+                pass
+
+    instr = """STRICT RULES:
+1. Return ONE logical name for the function in <name>. NO 'FUN_' prefix.
+2. If you figure out what a global DAT_ variable represents, rename it using <rename><old>DAT_XXXX</old><new>g_MeaningfulName</new></rename>. You can do this multiple times.
+3. Suggest the next interesting PENDING function in <suggestion>.
+"""
+    
+    context_str = ""
+    if apis or strings:
+        context_str = f"Context Derived from XREFs:\n- Windows APIs Called: {apis}\n- Strings Referenced: {strings}\n\n"
     
     if phase == "final_sweep":
-        prompt = f"FINAL SWEEP: Analyze {target}.\nCode:\n{code}\n\n{instr}\nFormat: <analysis><name>Name</name><summary>Logic</summary></analysis>"
+        prompt = f"FINAL SWEEP: Analyze {target}.\n{context_str}Code:\n{code}\n\n{instr}\nFormat: <analysis><name>Name</name><summary>Logic</summary><rename><old>DAT_...</old><new>g_...</new></rename></analysis>"
     elif phase == "revisit":
-        prompt = f"Revisit {target} with context.\nCode:\n{code}\n\n{instr}\nFormat: <analysis><name>Name</name><summary>Logic</summary></analysis>"
+        prompt = f"Revisit {target} with context.\n{context_str}Code:\n{code}\n\n{instr}\nFormat: <analysis><name>Name</name><summary>Logic</summary><rename><old>DAT_...</old><new>g_...</new></rename></analysis>"
     else:
-        prompt = f"Analyze {target}.\nCode:\n{code}\n\n{instr}\nSuggest PENDING sub-call in <suggestion>.\nFormat: <analysis><name>Name</name><summary>Logic</summary><suggestion>FUN_XXXX</suggestion></analysis>"
+        prompt = f"Analyze {target}.\n{context_str}Code:\n{code}\n\n{instr}\nFormat: <analysis><name>Name</name><summary>Logic</summary><suggestion>FUN_XXXX</suggestion><rename><old>DAT_...</old><new>g_...</new></rename></analysis>"
     
     try:
+        # Added a 4 second sleep here as well to respect rate limits during the Analyst Phase!
+        time.sleep(4)
         res = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
         res_text = res.text
+        
         name_raw = extract_xml(res_text, "name").strip().split()
         suggestion = extract_xml(res_text, "suggestion")
         summary = extract_xml(res_text, "summary")
+        renames = re.findall(r'<rename>\s*<old>(.*?)</old>\s*<new>(.*?)</new>\s*</rename>', res_text, re.DOTALL)
 
         bad_name = not name_raw or name_raw[0].upper().startswith("FUN_") or name_raw[0] == target
         
@@ -259,12 +346,21 @@ def analyst_node(state: REState):
 
         new_functions = state["functions"].copy()
         new_functions[target].update({"status": status, "summary": summary})
+        
         new_symbols = state["symbol_table"].copy()
         new_symbols[target] = extracted_name
         
+        for old_var, new_var in renames:
+            clean_old = old_var.strip()
+            clean_new = new_var.strip()
+            if clean_old.startswith("DAT_") and clean_old not in new_symbols:
+                new_symbols[clean_old] = clean_new
+                tqdm.write(f"[*] Discovered Global Variable: {clean_old} -> {clean_new}")
+        
         return {"functions": new_functions, "symbol_table": new_symbols, "suggested_target": suggestion, "history": [f"Processed {target} -> {extracted_name} ({status})"]}
     except Exception as e:
-        if "429" in str(e): time.sleep(10)
+        tqdm.write(f"[!] API Error on {target}: {str(e)}")
+        time.sleep(10)
         return {"history": [f"Error on {target}: {str(e)}"], "suggested_target": ""}
 
 # --- 4. GRAPH CONSTRUCTION ---
