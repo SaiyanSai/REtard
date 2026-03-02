@@ -10,37 +10,37 @@
         "strings": []
     },
     "FUN_01002717": {
-        "score": 6,
+        "score": 3,
         "apis": [
-            "CreateCompatibleDC",
-            "LoadBitmapW",
-            "SelectObject",
-            "DeleteObject",
             "BitBlt",
-            "DeleteDC"
+            "DeleteObject",
+            "DeleteDC",
+            "CreateCompatibleDC",
+            "SelectObject",
+            "LoadBitmapW"
         ],
         "strings": [
             "FELT"
         ]
     },
     "FUN_01002899": {
-        "score": 6,
+        "score": 1,
         "apis": [
-            "LoadBitmapW",
+            "BitBlt",
+            "LineTo",
+            "DeleteObject",
+            "DeleteDC",
             "CreateCompatibleDC",
             "SelectObject",
-            "DeleteObject",
-            "BitBlt",
             "SetPixel",
             "MoveToEx",
             "wsprintfW",
-            "LineTo",
-            "DeleteDC"
+            "LoadBitmapW"
         ],
         "strings": [
-            "FELT",
+            "CARD%d",
             "CARDBACK",
-            "CARD%d"
+            "FELT"
         ]
     },
     "FUN_01002ab2": {
@@ -54,7 +54,7 @@
         "strings": []
     },
     "FUN_01002b1a": {
-        "score": 2,
+        "score": 3,
         "apis": [
             "GetClientRect"
         ],
@@ -113,22 +113,22 @@
         "strings": []
     },
     "FUN_01002e98": {
-        "score": 4,
+        "score": 0,
         "apis": [
-            "InvalidateRect",
-            "GetClientRect"
+            "GetClientRect",
+            "InvalidateRect"
         ],
         "strings": []
     },
     "FUN_01002f77": {
-        "score": 5,
+        "score": 3,
         "apis": [
-            "MoveWindow",
             "SetTimer",
             "EndDialog",
             "PeekMessageW",
-            "GetParent",
-            "GetWindowRect"
+            "GetWindowRect",
+            "MoveWindow",
+            "GetParent"
         ],
         "strings": []
     },
@@ -186,7 +186,7 @@
         "strings": []
     },
     "FUN_010032d6": {
-        "score": 4,
+        "score": 3,
         "apis": [
             "BitBlt"
         ],
@@ -203,17 +203,17 @@
         "strings": []
     },
     "FUN_010035fb": {
-        "score": 6,
+        "score": 3,
         "apis": [
             "LoadStringW"
         ],
         "strings": []
     },
     "FUN_01003627": {
-        "score": 2,
+        "score": 4,
         "apis": [
-            "lstrcpyW",
-            "MessageBoxW"
+            "MessageBoxW",
+            "lstrcpyW"
         ],
         "strings": []
     },
@@ -225,14 +225,14 @@
     "FUN_01003712": {
         "score": 3,
         "apis": [
-            "SetCapture",
             "GetDC",
+            "SetCapture",
             "ReleaseDC"
         ],
         "strings": []
     },
     "FUN_01003811": {
-        "score": 3,
+        "score": 2,
         "apis": [
             "GetClientRect"
         ],
@@ -269,7 +269,7 @@
         "strings": []
     },
     "FUN_01003be7": {
-        "score": 3,
+        "score": 6,
         "apis": [
             "GetMenu",
             "EnableMenuItem"
@@ -279,100 +279,100 @@
     "FUN_01003c6e": {
         "score": 3,
         "apis": [
-            "RegCloseKey",
             "RegOpenKeyExW",
-            "RegQueryValueExW"
+            "RegQueryValueExW",
+            "RegCloseKey"
         ],
         "strings": [
-            "WndX",
-            "SaveOnExit",
+            "StreakWins_Easy",
             "PromptSave",
-            "Wins_Medium",
-            "FWinStreak_Medium",
+            "WndState",
             "WndY",
-            "HighScore_Medium",
-            "AnimDeal",
-            "HighScore_Difficult",
-            "StreakLosses_Difficult",
-            "StreakWins_Medium",
-            "Wins_Difficult",
-            "Losses_Difficult",
-            "StreakLosses_Easy",
-            "WndWidth",
-            "Wins_Easy",
-            "FWinStreak_Difficult",
-            "NumSuits",
-            "Software\\Microsoft\\Spider",
-            "StreakCurrent_Easy",
-            "FWinStreak_Easy",
             "LoadAtStart",
-            "WndHeight",
+            "NumSuits",
+            "SaveOnExit",
+            "StreakLosses_Medium",
+            "StreakLosses_Easy",
+            "StreakWins_Difficult",
+            "AnimDeal",
+            "StreakCurrent_Difficult",
+            "FWinStreak_Difficult",
             "PromptLoad",
             "StreakCurrent_Medium",
-            "Losses_Medium",
-            "WndState",
-            "StreakLosses_Medium",
-            "StreakCurrent_Difficult",
-            "HighScore_Easy",
-            "StreakWins_Easy",
-            "Sound",
+            "WndX",
+            "FWinStreak_Easy",
             "Losses_Easy",
-            "StreakWins_Difficult"
+            "HighScore_Easy",
+            "HighScore_Medium",
+            "Wins_Medium",
+            "Wins_Easy",
+            "WndWidth",
+            "FWinStreak_Medium",
+            "Losses_Medium",
+            "StreakCurrent_Easy",
+            "Losses_Difficult",
+            "WndHeight",
+            "HighScore_Difficult",
+            "StreakWins_Medium",
+            "StreakLosses_Difficult",
+            "Software\\Microsoft\\Spider",
+            "Wins_Difficult",
+            "Sound"
         ]
     },
     "FUN_0100411f": {
-        "score": 9,
+        "score": 2,
         "apis": [
             "IsZoomed",
-            "RegSetValueExW",
-            "RegCloseKey",
-            "GetWindowRect",
-            "IsIconic",
             "GetWindowPlacement",
-            "RegCreateKeyExW"
+            "RegCreateKeyExW",
+            "IsIconic",
+            "RegSetValueExW",
+            "GetWindowRect",
+            "RegCloseKey"
         ],
         "strings": [
-            "StreakCurrent_Difficult",
-            "HighScore_Medium",
-            "Wins_Difficult",
-            "StreakWins_Medium",
-            "Wins_Medium",
-            "StreakCurrent_Easy",
-            "WndHeight",
-            "WndWidth",
-            "WndState",
-            "SaveOnExit",
-            "HighScore_Easy",
-            "StreakCurrent_Medium",
-            "FWinStreak_Medium",
-            "StreakWins_Difficult",
-            "StreakLosses_Medium",
-            "FWinStreak_Difficult",
-            "Losses_Medium",
-            "WndX",
-            "StreakLosses_Easy",
-            "FWinStreak_Easy",
-            "Sound",
-            "WndY",
-            "Losses_Difficult",
-            "PromptSave",
-            "NumSuits",
-            "StreakLosses_Difficult",
-            "AnimDeal",
             "StreakWins_Easy",
-            "Losses_Easy",
+            "PromptSave",
+            "WndState",
+            "WndY",
             "LoadAtStart",
-            "Software\\Microsoft\\Spider",
+            "NumSuits",
+            "SaveOnExit",
+            "StreakLosses_Medium",
+            "StreakLosses_Easy",
+            "StreakWins_Difficult",
+            "AnimDeal",
+            "StreakCurrent_Difficult",
+            "FWinStreak_Difficult",
             "PromptLoad",
+            "StreakCurrent_Medium",
+            "WndX",
+            "FWinStreak_Easy",
+            "Losses_Easy",
+            "HighScore_Easy",
+            "HighScore_Medium",
+            "Wins_Medium",
             "Wins_Easy",
-            "HighScore_Difficult"
+            "WndWidth",
+            "FWinStreak_Medium",
+            "Losses_Medium",
+            "StreakCurrent_Easy",
+            "Losses_Difficult",
+            "WndHeight",
+            "HighScore_Difficult",
+            "StreakWins_Medium",
+            "StreakLosses_Difficult",
+            "Software\\Microsoft\\Spider",
+            "Wins_Difficult",
+            "Sound"
         ]
     },
     "FUN_010044d0": {
         "score": 7,
         "apis": [
-            "CreateFileW",
             "SHGetSpecialFolderPathW",
+            "CreateFileW",
             "lstrcatW"
         ],
         "strings": [
@@ -380,27 +380,27 @@
         ]
     },
     "FUN_0100454d": {
-        "score": 2,
+        "score": 3,
         "apis": [
-            "EnableMenuItem",
-            "ReadFile",
-            "GlobalFree",
-            "DrawMenuBar",
-            "GetMenu",
-            "InvalidateRect",
             "GetFileSize",
             "CloseHandle",
-            "GlobalAlloc"
+            "GetMenu",
+            "ReadFile",
+            "DrawMenuBar",
+            "GlobalAlloc",
+            "InvalidateRect",
+            "GlobalFree",
+            "EnableMenuItem"
         ],
         "strings": [
             "Spider"
         ]
     },
     "FUN_010047bd": {
-        "score": 2,
+        "score": 3,
         "apis": [
-            "timeGetTime",
-            "Sleep"
+            "Sleep",
+            "timeGetTime"
         ],
         "strings": []
     },
@@ -412,19 +412,19 @@
     "FUN_01004a10": {
         "score": 3,
         "apis": [
+            "DrawTextW",
+            "GetTextColor",
+            "SetRect",
+            "SetTextColor",
             "CreateSolidBrush",
             "GetStockObject",
-            "GetTextColor",
-            "SetTextColor",
-            "DrawTextW",
-            "FillRect",
-            "wsprintfW",
-            "DeleteObject",
             "GetBkMode",
+            "wsprintfW",
+            "FillRect",
+            "FrameRect",
+            "DeleteObject",
             "SetBkMode",
-            "OffsetRect",
-            "SetRect",
-            "FrameRect"
+            "OffsetRect"
         ],
         "strings": [
             "Moves:",
@@ -432,23 +432,23 @@
         ]
     },
     "FUN_01004c2d": {
-        "score": 4,
+        "score": 5,
         "apis": [
             "GetDC",
-            "InvalidateRect",
-            "ReleaseDC"
+            "ReleaseDC",
+            "InvalidateRect"
         ],
         "strings": []
     },
     "FUN_01004dfb": {
-        "score": 2,
+        "score": 4,
         "apis": [
-            "GdiFlush",
             "GetDC",
-            "ReleaseDC",
-            "GetModuleHandleW",
+            "GdiFlush",
             "InvertRect",
-            "Sleep"
+            "Sleep",
+            "ReleaseDC",
+            "GetModuleHandleW"
         ],
         "strings": []
     },
@@ -458,20 +458,20 @@
         "strings": []
     },
     "FUN_01004f47": {
-        "score": 3,
+        "score": 2,
         "apis": [
             "GetMenu",
-            "EnableMenuItem",
-            "CloseHandle"
+            "CloseHandle",
+            "EnableMenuItem"
         ],
         "strings": []
     },
     "FUN_01004fa6": {
-        "score": 7,
+        "score": 2,
         "apis": [
-            "WriteFile",
-            "CloseHandle",
             "GlobalAlloc",
+            "CloseHandle",
+            "WriteFile",
             "GlobalFree"
         ],
         "strings": [
@@ -479,108 +479,108 @@
         ]
     },
     "FUN_01005115": {
-        "score": 5,
+        "score": 2,
         "apis": [
-            "CreateCompatibleDC",
+            "GetClientRect",
             "GetDC",
-            "DeleteDC",
-            "SelectObject",
-            "DeleteObject",
-            "CreateCompatibleBitmap",
-            "InvalidateRect",
             "ReleaseDC",
-            "GetClientRect"
+            "CreateCompatibleBitmap",
+            "DeleteObject",
+            "DeleteDC",
+            "InvalidateRect",
+            "CreateCompatibleDC",
+            "SelectObject"
         ],
         "strings": []
     },
     "FUN_01005396": {
         "score": 2,
         "apis": [
-            "ExcludeClipRect",
-            "RestoreDC",
             "GetClientRect",
-            "SaveDC"
+            "ExcludeClipRect",
+            "SaveDC",
+            "RestoreDC"
         ],
         "strings": []
     },
     "FUN_01005753": {
-        "score": 3,
+        "score": 6,
         "apis": [
-            "CreateCompatibleDC",
             "GetDC",
-            "SelectObject",
-            "CreateCompatibleBitmap",
             "SetCapture",
+            "CreateCompatibleBitmap",
+            "CreateCompatibleDC",
+            "SelectObject",
             "GetModuleHandleW"
         ],
         "strings": []
     },
     "FUN_010059a6": {
-        "score": 7,
+        "score": 2,
         "apis": [
             "GetDC",
-            "IntersectRect",
             "ReleaseCapture",
-            "InvalidateRect",
-            "ReleaseDC"
+            "ReleaseDC",
+            "IntersectRect",
+            "InvalidateRect"
         ],
         "strings": []
     },
     "FUN_01005afb": {
-        "score": 6,
+        "score": 3,
         "apis": [
-            "EnableMenuItem",
+            "GetMenu",
             "DrawMenuBar",
             "InvalidateRect",
-            "GetMenu",
             "UpdateWindow",
+            "EnableMenuItem",
             "GetModuleHandleW"
         ],
         "strings": []
     },
     "FUN_01005ca9": {
-        "score": 4,
+        "score": 2,
         "apis": [
-            "CreateCompatibleDC",
-            "LoadBitmapW",
+            "GetClientRect",
             "ExcludeClipRect",
-            "wsprintfW",
-            "LineTo",
-            "DeleteDC",
-            "SelectObject",
-            "DeleteObject",
-            "BitBlt",
-            "GetPixel",
             "SetPixel",
             "MoveToEx",
-            "GetClientRect"
+            "wsprintfW",
+            "LoadBitmapW",
+            "BitBlt",
+            "LineTo",
+            "DeleteObject",
+            "DeleteDC",
+            "CreateCompatibleDC",
+            "SelectObject",
+            "GetPixel"
         ],
         "strings": [
-            "FELT",
             "CARD%d",
-            "CARDBACK"
+            "CARDBACK",
+            "FELT"
         ]
     },
     "FUN_010061f0": {
-        "score": 3,
+        "score": 7,
         "apis": [
             "GetMenu",
-            "EnableMenuItem",
             "PostMessageW",
+            "EnableMenuItem",
             "GetModuleHandleW"
         ],
         "strings": []
     },
     "FUN_010062ae": {
-        "score": 3,
+        "score": 0,
         "apis": [
-            "CreateCompatibleDC",
             "GetDC",
-            "DeleteDC",
-            "SelectObject",
-            "DeleteObject",
+            "ReleaseDC",
             "CreateCompatibleBitmap",
-            "ReleaseDC"
+            "DeleteObject",
+            "DeleteDC",
+            "CreateCompatibleDC",
+            "SelectObject"
         ],
         "strings": []
     },
@@ -593,33 +593,33 @@
         "score": 2,
         "apis": [
             "GetDC",
+            "ReleaseDC",
             "InvalidateRect",
             "UpdateWindow",
-            "ReleaseDC",
             "GetModuleHandleW"
         ],
         "strings": []
     },
     "FUN_010066c9": {
-        "score": 2,
+        "score": 1,
         "apis": [],
         "strings": [
             "Spider"
         ]
     },
     "FUN_01006732": {
-        "score": 8,
+        "score": 2,
         "apis": [
-            "IntersectRect",
-            "DeleteDC",
-            "SelectObject",
-            "DeleteObject",
-            "BitBlt",
-            "PtInRect",
             "ReleaseCapture",
+            "ReleaseDC",
+            "PtInRect",
+            "BitBlt",
+            "IntersectRect",
+            "DeleteObject",
+            "DeleteDC",
             "InvalidateRect",
             "PostMessageW",
-            "ReleaseDC",
+            "SelectObject",
             "GetModuleHandleW"
         ],
         "strings": []
@@ -627,14 +627,14 @@
     "FUN_010069b2": {
         "score": 2,
         "apis": [
-            "GetSubMenu",
-            "EnableMenuItem",
             "GetDC",
+            "GetSubMenu",
+            "GetMenu",
+            "ReleaseDC",
             "DrawMenuBar",
             "InvalidateRect",
-            "GetMenu",
             "UpdateWindow",
-            "ReleaseDC",
+            "EnableMenuItem",
             "GetModuleHandleW"
         ],
         "strings": [
@@ -642,15 +642,15 @@
         ]
     },
     "FUN_01006bc3": {
-        "score": 7,
+        "score": 2,
         "apis": [
-            "GetDesktopWindow",
-            "SendMessageW",
             "GetMenu",
-            "GetForegroundWindow",
-            "UpdateWindow",
             "DefWindowProcW",
-            "lstrcpyW"
+            "lstrcpyW",
+            "GetDesktopWindow",
+            "UpdateWindow",
+            "SendMessageW",
+            "GetForegroundWindow"
         ],
         "strings": [
             "Spider",
@@ -658,17 +658,17 @@
         ]
     },
     "FUN_01006db6": {
-        "score": 6,
+        "score": 7,
         "apis": [
-            "BeginPaint",
-            "DefWindowProcW",
             "GetSystemMetrics",
             "EndPaint",
             "IsIconic",
-            "PostQuitMessage",
-            "UpdateWindow",
             "ShowWindow",
-            "DestroyWindow"
+            "UpdateWindow",
+            "BeginPaint",
+            "DefWindowProcW",
+            "DestroyWindow",
+            "PostQuitMessage"
         ],
         "strings": [
             "Spider"
@@ -680,24 +680,24 @@
         "strings": []
     },
     "FUN_010070c0": {
-        "score": 9,
+        "score": 4,
         "apis": [
-            "WaitMessage",
-            "RegisterClassW",
-            "GetMessageW",
-            "GetVersionExA",
-            "DispatchMessageW",
-            "LoadStringA",
-            "LoadCursorW",
             "CreateWindowExW",
-            "MessageBoxA",
+            "WaitMessage",
+            "LoadCursorW",
+            "GetMessageW",
             "InitCommonControlsEx",
+            "LoadStringA",
+            "GetVersionExA",
+            "RegisterClassW",
+            "MessageBoxA",
+            "TranslateMessage",
+            "PostMessageW",
+            "PeekMessageW",
             "ShowWindow",
             "UpdateWindow",
-            "PeekMessageW",
-            "PostMessageW",
-            "TranslateMessage",
-            "TranslateAcceleratorW"
+            "TranslateAcceleratorW",
+            "DispatchMessageW"
         ],
         "strings": [
             "Spider",
@@ -740,50 +740,50 @@
         "strings": []
     },
     "FUN_01007565": {
-        "score": 2,
+        "score": 4,
         "apis": [
-            "CreateCompatibleDC",
-            "GetStockObject",
             "GetDC",
             "DrawTextW",
-            "DeleteDC",
-            "SelectObject",
-            "DeleteObject",
-            "BitBlt",
-            "SetBkMode",
-            "EndDialog",
+            "GetStockObject",
             "ReleaseDC",
-            "lstrcpyW"
+            "lstrcpyW",
+            "BitBlt",
+            "EndDialog",
+            "DeleteObject",
+            "DeleteDC",
+            "CreateCompatibleDC",
+            "SelectObject",
+            "SetBkMode"
         ],
         "strings": [
             "\u00a9 1998-2000 Microsoft Corporation.  \nAll rights reserved."
         ]
     },
     "FUN_010076c2": {
-        "score": 3,
+        "score": 2,
         "apis": [
+            "GetDlgItem",
             "SendMessageW",
-            "SetDlgItemTextW",
             "wsprintfW",
-            "GetDlgItem"
+            "SetDlgItemTextW"
         ],
         "strings": [
-            "Current:\t\t%d Losses",
-            "Current:\t\t%d Wins",
-            "Win Rate:\t%d %%",
-            "Most Losses:\t%d",
-            "Wins:\t\t%d",
-            "\t\t%d",
             "Most Wins:\t%d",
-            "Losses:\t\t%d"
+            "Most Losses:\t%d",
+            "Win Rate:\t%d %%",
+            "Losses:\t\t%d",
+            "\t\t%d",
+            "Wins:\t\t%d",
+            "Current:\t\t%d Losses",
+            "Current:\t\t%d Wins"
         ]
     },
     "FUN_010078d9": {
-        "score": 0,
+        "score": 2,
         "apis": [
             "IsDlgButtonChecked",
-            "WinHelpW",
             "EndDialog",
+            "WinHelpW",
             "CheckDlgButton",
             "lstrcpyW"
         ],
@@ -792,21 +792,21 @@
         ]
     },
     "FUN_01007b06": {
-        "score": 5,
+        "score": 4,
         "apis": [
             "IsDlgButtonChecked",
-            "CheckRadioButton",
-            "EndDialog"
+            "EndDialog",
+            "CheckRadioButton"
         ],
         "strings": []
     },
     "FUN_01007be2": {
-        "score": 1,
+        "score": 8,
         "apis": [
-            "SendMessageW",
             "EndDialog",
-            "GetDlgItemTextW",
-            "GetDlgItem"
+            "GetDlgItem",
+            "SendMessageW",
+            "GetDlgItemTextW"
         ],
         "strings": [
             "Spider"
@@ -918,14 +918,14 @@
         "strings": []
     },
     "FUN_0100821a": {
-        "score": 3,
+        "score": 4,
         "apis": [
             "BitBlt"
         ],
         "strings": []
     },
     "FUN_01008253": {
-        "score": 4,
+        "score": 7,
         "apis": [
             "BitBlt"
         ],
@@ -934,42 +934,42 @@
     "FUN_01008281": {
         "score": 2,
         "apis": [
-            "SelectObject",
             "DeleteObject",
+            "DeleteDC",
             "InvalidateRect",
-            "DeleteDC"
+            "SelectObject"
         ],
         "strings": []
     },
     "FUN_01008309": {
         "score": 3,
         "apis": [
+            "lstrlenW",
+            "DrawTextW",
+            "GetTextExtentPoint32W",
+            "SetRect",
+            "SetTextColor",
             "SetBkMode",
             "timeGetTime",
-            "SetRect",
-            "lstrlenW",
-            "SetTextColor",
-            "UnionRect",
-            "DrawTextW",
-            "GetTextExtentPoint32W"
+            "UnionRect"
         ],
         "strings": []
     },
     "FUN_010084c1": {
-        "score": 5,
+        "score": 3,
         "apis": [
             "timeGetTime"
         ],
         "strings": []
     },
     "FUN_01008700": {
-        "score": 2,
+        "score": 3,
         "apis": [
-            "SelectObject",
             "DeleteObject",
+            "SetRect",
+            "SelectObject",
             "CreateSolidBrush",
             "Ellipse",
-            "SetRect",
             "UnionRect"
         ],
         "strings": []
@@ -1002,24 +1002,24 @@
         "strings": []
     },
     "FUN_01008b21": {
-        "score": 5,
+        "score": 6,
         "apis": [
-            "CreateCompatibleDC",
-            "timeGetTime",
-            "GetDC",
-            "LoadStringW",
-            "SelectObject",
-            "CreateCompatibleBitmap",
-            "SetRect",
-            "MulDiv",
-            "CreateFontIndirectW",
-            "ReleaseDC",
             "GetClientRect",
-            "GetDeviceCaps"
+            "GetDC",
+            "GetDeviceCaps",
+            "SetRect",
+            "LoadStringW",
+            "ReleaseDC",
+            "timeGetTime",
+            "CreateCompatibleBitmap",
+            "CreateCompatibleDC",
+            "SelectObject",
+            "MulDiv",
+            "CreateFontIndirectW"
         ],
         "strings": [
-            "You Won!",
-            "Arial"
+            "Arial",
+            "You Won!"
         ]
     },
     "FUN_01008c80": {
@@ -1035,23 +1035,23 @@
         "strings": []
     },
     "FUN_01008d21": {
-        "score": 2,
+        "score": 4,
         "apis": [
+            "GetDC",
             "BitBlt",
             "SetRect",
-            "UnionRect",
-            "GetDC",
-            "ReleaseDC"
+            "ReleaseDC",
+            "UnionRect"
         ],
         "strings": []
     },
     "FUN_01008e6b": {
         "score": 6,
         "apis": [
-            "UnhandledExceptionFilter",
             "SetUnhandledExceptionFilter",
-            "GetCurrentProcess",
-            "TerminateProcess"
+            "TerminateProcess",
+            "UnhandledExceptionFilter",
+            "GetCurrentProcess"
         ],
         "strings": []
     },
@@ -1111,15 +1111,15 @@
         "strings": []
     },
     "FUN_01009560": {
-        "score": 4,
+        "score": 7,
         "apis": [
-            "GetProcAddress",
             "GetModuleHandleA",
-            "ExitProcess"
+            "ExitProcess",
+            "GetProcAddress"
         ],
         "strings": [
-            "CorExitProcess",
-            "mscoree.dll"
+            "mscoree.dll",
+            "CorExitProcess"
         ]
     },
     "FUN_010095ba": {
@@ -1148,18 +1148,18 @@
         "strings": []
     },
     "FUN_01009701": {
-        "score": 8,
+        "score": 6,
         "apis": [
+            "GetModuleFileNameA",
             "WriteFile",
-            "GetStdHandle",
-            "GetModuleFileNameA"
+            "GetStdHandle"
         ],
         "strings": [
-            "Runtime Error!\\n\\nProgram: ",
-            "<program name unknown>",
+            "Runtime Error!\n\nProgram: ",
             "Microsoft Visual C++ Runtime Library",
-            "R6009\r\n- not enough space for environment\r\n",
-            "Runtime Error!\n\nProgram: "
+            "<program name unknown>",
+            "Runtime Error!\\n\\nProgram: ",
+            "R6009\r\n- not enough space for environment\r\n"
         ]
     },
     "FUN_01009aa4": {
@@ -1173,24 +1173,24 @@
         "strings": []
     },
     "FUN_01009e15": {
-        "score": 5,
+        "score": 3,
         "apis": [
-            "GetEnvironmentStrings",
-            "FreeEnvironmentStringsA",
             "FreeEnvironmentStringsW",
-            "GetEnvironmentStringsW",
+            "WideCharToMultiByte",
+            "GetEnvironmentStrings",
             "GetLastError",
-            "WideCharToMultiByte"
+            "FreeEnvironmentStringsA",
+            "GetEnvironmentStringsW"
         ],
         "strings": []
     },
     "FUN_01009f42": {
-        "score": 6,
+        "score": 8,
         "apis": [
+            "GetFileType",
             "GetStdHandle",
             "SetHandleCount",
-            "GetStartupInfoA",
-            "GetFileType"
+            "GetStartupInfoA"
         ],
         "strings": []
     },
@@ -1200,7 +1200,7 @@
         "strings": []
     },
     "FUN_0100a112": {
-        "score": 3,
+        "score": 6,
         "apis": [
             "HeapCreate",
             "HeapDestroy"
@@ -1213,7 +1213,7 @@
         "strings": []
     },
     "FUN_0100a312": {
-        "score": 5,
+        "score": 3,
         "apis": [
             "HeapFree"
         ],
@@ -1264,13 +1264,13 @@
     "FUN_0100a89d": {
         "score": 2,
         "apis": [
-            "HeapAlloc",
-            "HeapReAlloc"
+            "HeapReAlloc",
+            "HeapAlloc"
         ],
         "strings": []
     },
     "FUN_0100aa3a": {
-        "score": 2,
+        "score": 3,
         "apis": [
             "HeapSize"
         ],
@@ -1280,14 +1280,14 @@
         "score": 3,
         "apis": [],
         "strings": [
-            "exp2",
+            "floor",
+            "ceil",
             "log10",
+            "exp2",
+            "log2",
             "modf",
             "atan",
-            "exp10",
-            "floor",
-            "log2",
-            "ceil"
+            "exp10"
         ]
     },
     "FUN_0100acf3": {
@@ -1336,7 +1336,7 @@
         "strings": []
     },
     "FUN_0100b86b": {
-        "score": 1,
+        "score": 2,
         "apis": [
             "GetCPInfo"
         ],
@@ -1345,7 +1345,7 @@
         ]
     },
     "FUN_0100bc17": {
-        "score": 4,
+        "score": 2,
         "apis": [
             "HeapAlloc"
         ],
@@ -1367,10 +1367,10 @@
         "strings": []
     },
     "FUN_0100c88a": {
-        "score": 5,
+        "score": 4,
         "apis": [
-            "InterlockedExchange",
-            "VirtualQuery"
+            "VirtualQuery",
+            "InterlockedExchange"
         ],
         "strings": []
     },
@@ -1480,23 +1480,23 @@
         "strings": []
     },
     "FUN_0100e6ed": {
-        "score": 3,
+        "score": 5,
         "apis": [
-            "LCMapStringA",
-            "MultiByteToWideChar",
             "LCMapStringW",
+            "MultiByteToWideChar",
+            "WideCharToMultiByte",
             "GetLastError",
-            "WideCharToMultiByte"
+            "LCMapStringA"
         ],
         "strings": []
     },
     "FUN_0100eabe": {
         "score": 4,
         "apis": [
-            "GetStringTypeW",
-            "MultiByteToWideChar",
             "GetStringTypeA",
-            "GetLastError"
+            "MultiByteToWideChar",
+            "GetLastError",
+            "GetStringTypeW"
         ],
         "strings": []
     },
@@ -1521,35 +1521,35 @@
         "strings": []
     },
     "FUN_0100f307": {
-        "score": 1,
+        "score": 3,
         "apis": [],
         "strings": [
             "1#IND",
-            "1#SNAN",
             "1#INF",
+            "1#SNAN",
             "1#QNAN"
         ]
     },
     "FUN_0100f693": {
-        "score": 0,
+        "score": 3,
         "apis": [
-            "GetCPInfo",
             "MultiByteToWideChar",
-            "WideCharToMultiByte"
+            "WideCharToMultiByte",
+            "GetCPInfo"
         ],
         "strings": []
     },
     "FUN_0100f882": {
-        "score": 6,
+        "score": 7,
         "apis": [
-            "VirtualProtect",
+            "VirtualQuery",
             "GetSystemInfo",
-            "VirtualQuery"
+            "VirtualProtect"
         ],
         "strings": []
     },
     "FUN_0100f906": {
-        "score": 0,
+        "score": 5,
         "apis": [
             "HeapAlloc"
         ],

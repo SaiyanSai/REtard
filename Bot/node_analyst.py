@@ -16,59 +16,54 @@ def analyst_node(state: REState):
     apis = func_data.get("apis", [])
     strings = func_data.get("strings", [])
     
+    # Identify previously renamed symbols for context
+    placeholder_patterns = r'^(uVar|iVar|lVar|pcVar|pvVar|local_|param_|DAT_|FUN_|PTR_|D?WORD_|BYTE_)\d+'
+    resolved_vars = []
+    for old, new in state["symbol_table"].items():
+        if re.match(placeholder_patterns, old) and not re.match(placeholder_patterns, new):
+            resolved_vars.append(f"{old} -> {new}")
+    
+    var_context = ""
+    if resolved_vars:
+        var_context = "Verified Symbols (already applied to code):\n" + \
+                     "\n".join([f"- {v}" for v in resolved_vars]) + "\n\n"
+    
+    # Apply all existing renames to the code
     sorted_symbols = sorted(state["symbol_table"].items(), key=lambda x: len(x[0]), reverse=True)
     for old, new in sorted_symbols:
         code = re.sub(rf'\b{old}\b', new, code)
 
+    # Apply string references
     if Path(STRINGS_JSON).exists():
         with open(STRINGS_JSON, "r", encoding="utf-8") as f:
             try:
                 data = json.load(f)
                 address_map = data.get("address_map", {})
-                
-                string_map_ints = {}
-                for addr_str, val in address_map.items():
-                    try:
-                        string_map_ints[int(addr_str, 16)] = val
-                    except ValueError: pass
-                
+                string_map_ints = {int(addr, 16): val for addr, val in address_map.items() if addr.startswith("0x")}
                 for m in re.finditer(r'0x([0-9a-fA-F]+)', code):
-                    try:
-                        addr = int(m.group(1), 16)
-                        if addr in string_map_ints:
-                            code = code.replace(m.group(0), f'"{string_map_ints[addr]}"')
-                    except: pass
-                
-                for m in re.finditer(r'([A-Za-z_]+_([0-9a-fA-F]{6,16}))\b', code):
-                    try:
-                        addr = int(m.group(2), 16)
-                        if addr in string_map_ints:
-                            code = code.replace(m.group(1), f'"{string_map_ints[addr]}"')
-                    except: pass
-            except json.JSONDecodeError:
-                pass
+                    addr = int(m.group(1), 16)
+                    if addr in string_map_ints:
+                        code = code.replace(m.group(0), f'"{string_map_ints[addr]}"')
+            except: pass
 
     instr = """STRICT RULES:
-1. Return ONE logical name for the function in <name>. NO 'FUN_' prefix.
-2. If you figure out what a global DAT_ variable represents, rename it using <rename><old>DAT_XXXX</old><new>g_MeaningfulName</new></rename>. You can do this multiple times.
-3. Suggest the next interesting PENDING function in <suggestion>.
+1. Return ONE logical name for the function in <name>.
+2. Rename variables (DAT_XXXX, uVarX, local_X, etc.) in <rename> tags ONLY if you understand their specific purpose (e.g., 'loop_counter', 'heap_handle').
+3. PROHIBITED: Do not use generic names like 'someGlobalValue', 'tempVar', or 'UnknownFunction'.
+4. If you are unsure of the purpose of a function or variable, you MUST KEEP its original placeholder name.
+5. Suggest the next interesting PENDING function in <suggestion>.
 """
     
-    context_str = ""
-    if apis or strings:
-        context_str = f"Context Derived from XREFs:\n- Windows APIs Called: {apis}\n- Strings Referenced: {strings}\n\n"
-    
-    if phase == "final_sweep":
-        prompt = f"FINAL SWEEP: Analyze {target}.\n{context_str}Code:\n{code}\n\n{instr}\nFormat: <analysis><name>Name</name><summary>Logic</summary><rename><old>DAT_...</old><new>g_...</new></rename></analysis>"
-    elif phase == "revisit":
-        prompt = f"Revisit {target} with context.\n{context_str}Code:\n{code}\n\n{instr}\nFormat: <analysis><name>Name</name><summary>Logic</summary><rename><old>DAT_...</old><new>g_...</new></rename></analysis>"
-    else:
-        prompt = f"Analyze {target}.\n{context_str}Code:\n{code}\n\n{instr}\nFormat: <analysis><name>Name</name><summary>Logic</summary><suggestion>FUN_XXXX</suggestion><rename><old>DAT_...</old><new>g_...</new></rename></analysis>"
-    
-    print(f"\n{'='*60}\n[DEBUG: PROMPT FOR {target}]\n{'='*60}\n{prompt}\n{'='*60}\n")
+    context_str = f"Context: APIs={apis}, Strings={strings}\n\n"
+    header = f"Analyze {target}."
+    if phase == "final_sweep": header = f"FINAL SWEEP: Analyze {target}."
+    elif phase == "revisit": header = f"Revisit {target} with context."
+
+    prompt = f"{header}\n{context_str}{var_context}Code:\n{code}\n\n{instr}\n"
+    prompt += "Format: <analysis><name>Name</name><summary>Logic</summary><suggestion>FUN_...</suggestion><rename><old>...</old><new>...</new></rename></analysis>"
     
     try:
-        time.sleep(4) # THROTTLE
+        time.sleep(4) 
         res = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
         res_text = res.text
         
@@ -77,8 +72,35 @@ def analyst_node(state: REState):
         summary = extract_xml(res_text, "summary")
         renames = re.findall(r'<rename>\s*<old>(.*?)</old>\s*<new>(.*?)</new>\s*</rename>', res_text, re.DOTALL)
 
-        bad_name = not name_raw or name_raw[0].upper().startswith("FUN_") or name_raw[0] == target
+        new_symbols = state["symbol_table"].copy()
         
+        # Symbol Resolution with quality check
+        for old_val_in_code, new_val_suggested in renames:
+            old_name, new_name = old_val_in_code.strip(), new_val_suggested.strip()
+            
+            # Quality Check: Ignore "lazy" renames (e.g., "someValue", "tempData")
+            is_lazy = any(new_name.lower().startswith(p) for p in ["some", "temp", "unknown", "var", "data", "placeholder"])
+            if is_lazy:
+                continue
+
+            original_key = next((k for k, v in new_symbols.items() if v == old_name), None)
+            target_key = original_key if original_key else old_name
+            
+            if not re.match(placeholder_patterns, new_name):
+                if target_key not in new_symbols or new_symbols[target_key] != new_name:
+                    new_symbols[target_key] = new_name
+                    tqdm.write(f"[*] Symbol Updated: {target_key} -> {new_name}")
+
+        # Status Logic for Functions
+        proposed_name = name_raw[0] if name_raw else target
+        
+        # Check if function name is a placeholder or generic
+        is_generic_func = any(proposed_name.lower().startswith(p) for p in ["some", "temp", "unknown", "subroutine", "stub"])
+        bad_name = proposed_name == target or proposed_name.upper().startswith("FUN_") or is_generic_func
+        
+        extracted_name = target
+        status = "ANALYZED"
+
         if bad_name:
             if phase == "final_sweep":
                 extracted_name = f"UnkLogic_{target.replace('FUN_', '')}"
@@ -86,10 +108,12 @@ def analyst_node(state: REState):
             else:
                 extracted_name = target
                 status = "PARTIAL_END"
-                tqdm.write(f"[!] {target} refused rename. Flagged for Final Sweep.")
+                tqdm.write(f"[!] {target} refused rename or gave generic name. Flagged for Final Sweep.")
         else:
-            extracted_name = name_raw[0]
-            status = "ANALYZED"
+            extracted_name = proposed_name
+            new_symbols[target] = extracted_name
+            tqdm.write(f"[*] Function Renamed: {target} -> {extracted_name}")
+            
             if phase not in ["revisit", "final_sweep"] and suggestion in state["functions"]:
                 if state["functions"][suggestion]["status"] == "PENDING":
                     status = "PARTIAL"
@@ -97,17 +121,12 @@ def analyst_node(state: REState):
         new_functions = state["functions"].copy()
         new_functions[target].update({"status": status, "summary": summary})
         
-        new_symbols = state["symbol_table"].copy()
-        new_symbols[target] = extracted_name
-        
-        for old_var, new_var in renames:
-            clean_old = old_var.strip()
-            clean_new = new_var.strip()
-            if clean_old.startswith("DAT_") and clean_old not in new_symbols:
-                new_symbols[clean_old] = clean_new
-                tqdm.write(f"[*] Discovered Global Variable: {clean_old} -> {clean_new}")
-        
-        return {"functions": new_functions, "symbol_table": new_symbols, "suggested_target": suggestion, "history": [f"Processed {target} -> {extracted_name} ({status})"]}
+        return {
+            "functions": new_functions, 
+            "symbol_table": new_symbols, 
+            "suggested_target": suggestion, 
+            "history": [f"Processed {target} -> {extracted_name} ({status})"]
+        }
     except Exception as e:
         tqdm.write(f"[!] API Error on {target}: {str(e)}")
         time.sleep(10)
