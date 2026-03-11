@@ -11,8 +11,7 @@ CHECKPOINT_DB = "Bot/graph_checkpoint.db"
 TRIAGE_CACHE = "Bot/triage_cache.json"
 STRINGS_JSON = "Bot/function_strings.json"
 OUTPUT_C = "Bot/decompiled_output.c"
-TARGET_BINARY = os.getenv("TARGET_BINARY", "spider.exe")
-
+TARGET_BINARY = "crackme.exe"
 # --- LLM SETUP ---
 API_KEY = os.getenv("GEMINI_API_KEY")
 # Standard client initialization
