@@ -18,16 +18,25 @@ def ingestion_node(state: REState):
     with open(OUTPUT_C, "r", encoding="utf-8") as f:
         content = f.read()
 
-    pattern = r"// --- Function: (FUN_.*?) @ (.*?) ---\n(.*?)(?=\n// --- Function:|\Z)"
+    pattern = r"// --- Function: (FUN_.*?|_?main|_?entry|DllMain|WinMain|wmain|wWinMain) @ (.*?) ---\n(.*?)(?=\n// --- Function:|\Z)"
     matches = re.findall(pattern, content, re.DOTALL)
 
     for name, addr, body in matches:
+        name = name.strip()
         if name not in functions:
             body_text = body.strip()
             functions[name] = {
-                "address": addr, "body": body_text,
-                "status": "PENDING", "string_score": -1,
+                "address": addr, 
+                "body": body_text,
+                "status": "PENDING", 
+                "string_score": -1,
                 "is_wrapper": check_if_wrapper(name, body_text),
                 "summary": ""
             }
-    return {"functions": functions, "symbol_table": symbol_table, "phase": "triage", "history": [f"Ingested {len(functions)} functions."]}
+            
+    return {
+        "functions": functions, 
+        "symbol_table": symbol_table, 
+        "phase": "triage", 
+        "history": [f"Ingested {len(functions)} target functions."]
+    }

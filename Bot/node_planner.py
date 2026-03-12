@@ -1,38 +1,33 @@
-from tqdm import tqdm
 from state import REState
+from tqdm import tqdm
 from utils import save_json_state
 
 def planner_node(state: REState):
-    save_json_state(state)
-    f = state["functions"]
-    pending = [n for n in f if f[n]["status"] == "PENDING"]
-    partial = [n for n in f if f[n]["status"] == "PARTIAL"]
-    p_end = [n for n in f if f[n]["status"] == "PARTIAL_END"]
+    funcs = state["functions"]
     
-    if not pending and not partial and not p_end:
-        return {"phase": "end", "current_target": None}
-
-    sug = state.get("suggested_target")
-    if sug and sug in pending:
-        tqdm.write(f"[*] Following LLM breadcrumb: {sug}")
-        return {"current_target": sug, "phase": "analysis_loop", "suggested_target": ""}
-
-    if partial:
-        tqdm.write(f"[*] Trail ended. Re-evaluating partial function: {partial[0]}")
-        return {"current_target": partial[0], "phase": "revisit", "suggested_target": ""}
-
-    wrappers = [n for n in pending if f[n]["is_wrapper"]]
-    if wrappers:
-        return {"current_target": sorted(wrappers)[0], "phase": "analysis_loop", "suggested_target": ""}
-
+    save_json_state(state)
+    
+    suggested = state.get("suggested_target")
+    if suggested and suggested in funcs and funcs[suggested]["status"] == "PENDING":
+        tqdm.write(f"[*] Following LLM breadcrumb: {suggested}")
+        return {"current_target": suggested, "phase": "analysis_loop", "history": []}
+    
+    pending = [(n, d) for n, d in funcs.items() if d["status"] == "PENDING"]
     if pending:
-        target = max(pending, key=lambda n: f[n]["string_score"])
-        tqdm.write(f"[*] Suggestion chain end. Anchoring to top priority function: {target} (Score: {f[target]['string_score']})")
-        return {"current_target": target, "phase": "analysis_loop", "suggested_target": ""}
+        best_func = max(pending, key=lambda x: x[1].get("string_score", 0))[0]
+        tqdm.write(f"[*] Anchoring to top priority function: {best_func} (Score: {funcs[best_func].get('string_score', 0)})")
+        return {"current_target": best_func, "phase": "analysis_loop", "suggested_target": "", "history": []}
+    
+    partials = [(n, d) for n, d in funcs.items() if d["status"] == "PARTIAL"]
+    if partials:
+        target = partials[0][0]
+        tqdm.write(f"[*] Re-evaluating partial function: {target}")
+        return {"current_target": target, "phase": "revisit", "suggested_target": "", "history": []}
+        
+    partial_ends = [(n, d) for n, d in funcs.items() if d["status"] == "PARTIAL_END"]
+    if partial_ends:
+        target = partial_ends[0][0]
+        tqdm.write(f"[*] Final Sweep: {target}")
+        return {"current_target": target, "phase": "final_sweep", "suggested_target": "", "history": []}
 
-    if p_end:
-        if state["phase"] != "final_sweep":
-            print("\n" + "="*30 + "\n[PHASE: FINAL SWEEP - RESOLVING STUBBORN FUNCTIONS]\n" + "="*30)
-        return {"current_target": p_end[0], "phase": "final_sweep", "suggested_target": ""}
-
-    return {"phase": "end", "current_target": None}
+    return {"phase": "end", "history": ["Analysis Complete."]}

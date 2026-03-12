@@ -1,6 +1,8 @@
 import re
 import json
 import time
+import traceback
+import concurrent.futures
 from pathlib import Path
 from tqdm import tqdm
 from state import REState
@@ -47,8 +49,9 @@ def triage_node(state: REState):
             except json.JSONDecodeError:
                 pass
 
+    ENTRY_POINTS = ["main", "_main", "entry", "_entry", "DllMain", "WinMain", "wmain", "wWinMain"]
+
     for name in tqdm(pending, desc="Triaging Strings & APIs"):
-        
         if name in triage_cache:
             cache_entry = triage_cache[name]
             if isinstance(cache_entry, int):
@@ -73,6 +76,14 @@ def triage_node(state: REState):
         new_functions[name]["apis"] = api_calls
         new_functions[name]["strings"] = clean_strings
         
+        if name in ENTRY_POINTS:
+            tqdm.write(f"\n[*] Found Entry Point: {name} (Forcing Max Priority)")
+            new_functions[name]["string_score"] = 999
+            triage_cache[name] = {"score": 999, "apis": api_calls, "strings": clean_strings}
+            with open(TRIAGE_CACHE, "w", encoding="utf-8") as f:
+                json.dump(triage_cache, f, indent=4)
+            continue
+            
         if not clean_strings and not api_calls:
             new_functions[name]["string_score"] = 0
             triage_cache[name] = {"score": 0, "apis": [], "strings": []}
@@ -93,9 +104,26 @@ def triage_node(state: REState):
         
         max_retries = 3
         for attempt in range(max_retries):
+            executor = None
             try:
-                res = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
-                score = int(extract_xml(res.text, "score") or 0)
+                tqdm.write(f" -> [DEBUG] Firing network request to Gemini (Attempt {attempt+1})...")
+                
+                # FIXED: Abandon thread instead of waiting for it to gracefully exit
+                executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+                future = executor.submit(
+                    client.models.generate_content,
+                    model="gemini-2.0-flash", 
+                    contents=prompt
+                )
+                res = future.result(timeout=15)
+                
+                tqdm.write(f" -> [DEBUG] Response received successfully.")
+                
+                score_str = extract_xml(res.text, "score")
+                try:
+                    score = int(score_str) if score_str else 0
+                except ValueError:
+                    score = 0
                 
                 new_functions[name]["string_score"] = score
                 triage_cache[name] = {"score": score, "apis": api_calls, "strings": clean_strings}
@@ -104,16 +132,30 @@ def triage_node(state: REState):
                     json.dump(triage_cache, f, indent=4)
                     
                 tqdm.write(f"[+] Triage: {name} | Score: {score}")
-                time.sleep(4) # THROTTLE to prevent 429
+                time.sleep(4) 
                 break 
                 
+            except concurrent.futures.TimeoutError:
+                tqdm.write(f"[!] API TIMEOUT on {name} (Attempt {attempt+1}/{max_retries}): Network socket hung. Retrying...")
+                if attempt < max_retries - 1:
+                    time.sleep(5)
+                else:
+                    tqdm.write(f"[-] Max retries reached for {name}. Assigning Score 0.")
+                    new_functions[name]["string_score"] = 0
             except Exception as e: 
                 tqdm.write(f"[!] API Error on {name} (Attempt {attempt+1}/{max_retries}): {type(e).__name__} - {str(e)}")
+                tqdm.write("-" * 40)
+                tqdm.write(traceback.format_exc())
+                tqdm.write("-" * 40)
                 if attempt < max_retries - 1:
                     tqdm.write("[*] Sleeping for 10 seconds before retrying...")
                     time.sleep(10)
                 else:
                     tqdm.write(f"[-] Max retries reached for {name}. Assigning Score 0.")
                     new_functions[name]["string_score"] = 0
+            finally:
+                if executor:
+                    # FORCE SHUTDOWN: Do not wait for the hung socket to reply!
+                    executor.shutdown(wait=False, cancel_futures=True)
 
     return {"functions": new_functions, "phase": "analysis_loop"}

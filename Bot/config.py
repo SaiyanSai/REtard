@@ -1,18 +1,19 @@
 import os
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 
-# Load environment variables
 load_dotenv()
 
-# --- FILE PATHS ---
-STATE_FILE = "Bot/analysis_state.json"
-CHECKPOINT_DB = "Bot/graph_checkpoint.db"
-TRIAGE_CACHE = "Bot/triage_cache.json"
-STRINGS_JSON = "Bot/function_strings.json"
+#GHIDRA_PATH = "/home/saiyansai/ghidra_11.3.1_PUBLIC/support/analyzeHeadless"
+PROJECT_DIR = "ghidra_projects"
+PROJECT_NAME = "MyProject"
+TARGET_BINARY = "cirno.dll"
+
 OUTPUT_C = "Bot/decompiled_output.c"
-TARGET_BINARY = "crackme.exe"
-# --- LLM SETUP ---
-API_KEY = os.getenv("GEMINI_API_KEY")
-# Standard client initialization
-client = genai.Client(api_key=API_KEY) if API_KEY else None
+STATE_FILE = "Bot/analysis_state.json"
+CHECKPOINT_DB = "state.db"
+STRINGS_JSON = "Bot/function_strings.json"
+TRIAGE_CACHE = "Bot/triage_cache.json"
+
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
