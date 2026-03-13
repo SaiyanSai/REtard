@@ -99,15 +99,40 @@ quit()
         
         subprocess.run(gdb_cmd, capture_output=True, text=True)
         
-        # ANXIETY RELIEF LOGS: Informing the user about the upcoming TTFT gap.
         log_to_terminal("[MCP SERVER] Trace complete.")
-        log_to_terminal("[MCP SERVER] 🧠 Uploading massive memory dump back to Gemini...")
-        log_to_terminal("[MCP SERVER] ⏳ Please wait. Gemini is analyzing the registers (this takes 30-60 seconds)...")
         
         if os.path.exists(trace_log_path):
             with open(trace_log_path, "r") as f:
                 trace_content = f.read()
-                return f"--- COMMANDS RUN ---\n{' '.join(compile_cmd)}\n{' '.join(gdb_cmd)}\n\n--- TRACE ---\n{trace_content}"
+                
+                trace_lines = trace_content.splitlines()
+                
+                # --- 1. TERMINAL PREVIEW (100 Lines) ---
+                if len(trace_lines) > 100:
+                    preview = "\n".join(trace_lines[:50]) + f"\n\n... [TRACE TRUNCATED: {len(trace_lines)-100} lines hidden from terminal] ...\n\n" + "\n".join(trace_lines[-50:])
+                else:
+                    preview = trace_content
+                    
+                log_to_terminal(f"\n=== GDB MEMORY DUMP PREVIEW ===\n{preview}\n===============================\n")
+                
+                # --- 2. AI CONTEXT TRUNCATION (1000 Lines) ---
+                MAX_AI_LINES = 1000
+                if len(trace_lines) > MAX_AI_LINES:
+                    log_to_terminal(f"[MCP SERVER] ⚠️ Trace is {len(trace_lines)} lines long! Truncating to {MAX_AI_LINES} lines to protect AI context limit...")
+                    
+                    # Grab first 500 lines (The math setup) and last 500 lines (The final memory state)
+                    head = "\n".join(trace_lines[:500])
+                    tail = "\n".join(trace_lines[-500:])
+                    warning_msg = f"\n\n... [MASSIVE EXECUTION LOOP DETECTED. {len(trace_lines)-MAX_AI_LINES} LINES OF TRACE REMOVED TO PREVENT TOKEN LIMIT CRASH. SHOWING FINAL MEMORY STATE BELOW] ...\n\n"
+                    
+                    ai_trace = head + warning_msg + tail
+                else:
+                    log_to_terminal("[MCP SERVER] 🧠 Uploading memory dump back to Gemini...")
+                    ai_trace = trace_content
+                
+                log_to_terminal("[MCP SERVER] ⏳ Please wait. Gemini is analyzing the registers...")
+                
+                return f"--- COMMANDS RUN ---\n{' '.join(compile_cmd)}\n{' '.join(gdb_cmd)}\n\n--- TRACE ---\n{ai_trace}"
         else:
             return "Execution completed, but no trace was generated."
 

@@ -2,10 +2,12 @@ import asyncio
 import os
 import re
 import sys
+import json
 from fastmcp import Client
+from google import genai
 from google.genai import types
 from state import REState
-from config import client
+from config import GLOBAL_DATA_JSON
 from tqdm import tqdm
 from utils import save_json_state, extract_xml
 
@@ -17,8 +19,35 @@ def dynamic_node(state: REState):
     tqdm.write(f"\n" + "="*50)
     tqdm.write(f"[*] FIRING UP MCP SERVER FOR {target}...")
     tqdm.write("="*50)
+    
+    # --- PREVENT CONTEXT BLOWOUT (Token Limit) ---
+    safe_code = code
+    if len(safe_code) > 200000:
+        tqdm.write("[!] Warning: Function code is massive. Truncating to 200KB...")
+        safe_code = safe_code[:200000] + "\n// [CODE TRUNCATED DUE TO SIZE LIMIT]\n"
+
+    global_data_c = ""
+    if os.path.exists(GLOBAL_DATA_JSON):
+        with open(GLOBAL_DATA_JSON, "r") as f:
+            try:
+                global_data_map = json.load(f)
+                needed_globals = []
+                for var_name, var_code in global_data_map.items():
+                    # FIX 1: Exact word boundary match so DAT_1 doesn't inject DAT_1000
+                    if re.search(rf'\b{re.escape(var_name)}\b', safe_code):
+                        needed_globals.append(var_code)
+                if needed_globals:
+                    global_data_c = "// --- EXTRACTED GLOBAL DATA ---\n" + "\n".join(needed_globals) + "\n// ------------------------------\n"
+                    
+                    if len(global_data_c) > 200000:
+                        tqdm.write(f"[*] Warning: Global data is massive. Truncating to safely fit in AI context...")
+                        global_data_c = global_data_c[:200000] + "\n ... }; \n// [DATA TRUNCATED TO PREVENT TOKEN CRASH]\n"
+            except Exception:
+                pass
 
     async def run_mcp_trace():
+        local_client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+        
         mcp_script_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "ghidra_analyzer.py")
         if not os.path.exists(mcp_script_path):
             mcp_script_path = os.path.join(os.path.dirname(__file__), "ghidra_analyzer.py")
@@ -30,19 +59,21 @@ def dynamic_node(state: REState):
             You are an automated dynamic analysis pipeline. This Ghidra C code contains an obfuscated algorithm, packing logic, or a string decryption loop.
             
             1. Fix the syntax for Linux (replace Windows/Ghidra types with standard C types).
-            2. Write a `main()` driver that allocates memory and passes it to the function.
-            3. Use your `compile_and_trace` tool to execute it inside GDB.
+            2. Notice the global data arrays provided below. They contain the actual compressed/encrypted payload from the binary. DO NOT stub them with random bytes, USE THEM!
+            3. Write a `main()` driver that allocates memory and passes it to the function.
+            4. Use your `compile_and_trace` tool to execute it inside GDB.
             
             Target Function: {target}
             
             Code:
-            {code}
+            {global_data_c}
+            {safe_code}
             
-            EXECUTION INSTRUCTIONS (STRICT ORDER):
-            1. FIRST, output a <thinking> block explaining what this function does and how you plan to write the C driver.
-            2. THEN, invoke the `compile_and_trace` tool.
-            3. AFTER the tool finishes, output a second <thinking> block explaining the memory trace results.
-            4. FINALLY, output your findings strictly in this XML format:
+            CRITICAL EXECUTION RULES:
+            You are operating in an autonomous loop. The user cannot reply to you. You MUST execute the tool yourself.
+            1. FIRST, output a <thinking> block explaining your driver plan.
+            2. IMMEDIATELY AFTER the closing </thinking> tag, you MUST invoke the `compile_and_trace` tool. Do not ask for permission. Do not write the C code in markdown. Pass the raw C code directly into the tool call arguments.
+            3. AFTER the tool returns the trace, output a final XML block:
             <analysis>
                 <name>DecryptedFunctionName</name>
                 <summary>Concise explanation of what the trace revealed.</summary>
@@ -56,7 +87,7 @@ def dynamic_node(state: REState):
             tqdm.write(f"[*] ⏳ NOTE: Gemini is now writing the C driver in the background.")
             tqdm.write(f"[*] ⏳ For massive entry functions, this step can take 2 to 4 minutes of silence. Please hold...")
             
-            response_stream = await client.aio.models.generate_content_stream(
+            response_stream = await local_client.aio.models.generate_content_stream(
                 model="gemini-2.5-pro", 
                 contents=prompt,
                 config=types.GenerateContentConfig(
@@ -92,8 +123,22 @@ def dynamic_node(state: REState):
                         
             return full_response
 
+    def run_isolated():
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            return loop.run_until_complete(run_mcp_trace())
+        finally:
+            pending = asyncio.all_tasks(loop)
+            for task in pending:
+                task.cancel()
+            if pending:
+                loop.run_until_complete(asyncio.gather(*pending, return_exceptions=True))
+            loop.close()
+            asyncio.set_event_loop(None)
+
     try:
-        trace_result = asyncio.run(run_mcp_trace())
+        trace_result = run_isolated()
         
         name_raw = extract_xml(trace_result, "name").strip().split()
         summary = extract_xml(trace_result, "summary")

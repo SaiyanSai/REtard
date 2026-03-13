@@ -39,8 +39,8 @@ builder.add_conditional_edges("planner", lambda x: "end" if x["phase"] == "end" 
 if __name__ == "__main__":
     with SqliteSaver.from_conn_string(CHECKPOINT_DB) as saver:
         graph = builder.compile(checkpointer=saver)
-        # Bump the thread id so it restarts fresh
-        config = {"configurable": {"thread_id": "spider_v21"}} 
+        # Fresh start
+        config = {"configurable": {"thread_id": "spider_v26"}} 
         
         initial_state = {
             "functions": {}, "symbol_table": {}, "current_target": "", 
@@ -54,8 +54,6 @@ if __name__ == "__main__":
                     pbar = tqdm(total=len(output["functions"]), initial=len(output["symbol_table"]), desc="Total Progress")
                 if node in ["analyst", "dynamic"] and pbar and any(s in h for h in output.get("history", []) for s in ["ANALYZED", "deobfuscated"]):
                     pbar.update(1)
-                
-                # FIXED: Check if the history list actually has items before grabbing [-1]
                 if output.get("history"): 
                     tqdm.write(f"[{node.upper()}] {output['history'][-1]}")
         

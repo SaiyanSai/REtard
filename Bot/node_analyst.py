@@ -69,8 +69,6 @@ def analyst_node(state: REState):
     try:
         time.sleep(4) 
         tqdm.write(f" -> [DEBUG] Sending Static Analysis request to Gemini...")
-        
-        # FIXED: Abandon thread instead of waiting for it to gracefully exit
         executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
         future = executor.submit(
             client.models.generate_content,
@@ -95,13 +93,10 @@ def analyst_node(state: REState):
         
         for old_val_in_code, new_val_suggested in renames:
             old_name, new_name = old_val_in_code.strip(), new_val_suggested.strip()
-            
             is_lazy = any(new_name.lower().startswith(p) for p in ["some", "temp", "unknown", "var", "data", "placeholder"])
             if is_lazy: continue
-
             original_key = next((k for k, v in new_symbols.items() if v == old_name), None)
             target_key = original_key if original_key else old_name
-            
             if not re.match(placeholder_patterns, new_name):
                 if target_key not in new_symbols or new_symbols[target_key] != new_name:
                     new_symbols[target_key] = new_name
@@ -130,7 +125,6 @@ def analyst_node(state: REState):
             extracted_name = proposed_name
             new_symbols[target] = extracted_name
             tqdm.write(f"[*] Function Renamed: {target} -> {extracted_name}")
-            
             if phase not in ["revisit", "final_sweep"] and suggestion in state["functions"]:
                 if state["functions"][suggestion]["status"] == "PENDING":
                     status = "PARTIAL"
@@ -149,13 +143,8 @@ def analyst_node(state: REState):
         time.sleep(5)
         return {"history": [f"Timeout error on {target}"], "suggested_target": ""}
     except Exception as e:
-        tqdm.write(f"[!] API Error on {target}: {type(e).__name__} - {str(e)}")
-        tqdm.write("-" * 40)
-        tqdm.write(traceback.format_exc())
-        tqdm.write("-" * 40)
+        tqdm.write(f"[!] API Error on {target}: {str(e)}")
         time.sleep(10)
         return {"history": [f"Error on {target}: {str(e)}"], "suggested_target": ""}
     finally:
-        if executor:
-            # FORCE SHUTDOWN: Abandon thread immediately!
-            executor.shutdown(wait=False, cancel_futures=True)
+        if executor: executor.shutdown(wait=False, cancel_futures=True)

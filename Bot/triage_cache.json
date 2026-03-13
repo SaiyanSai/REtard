@@ -1,77 +1,4 @@
 {
-    "_main": {
-        "score": 999,
-        "apis": [
-            "toupper"
-        ],
-        "strings": [
-            "%c victory!\\n\\n",
-            "Draw!\\n\\n",
-            "\\x1b[1;1H\\x1b[2J",
-            "%c victory!\n\n",
-            "Draw!\n\n"
-        ]
-    },
-    "FUN_00401778": {
-        "score": 0,
-        "apis": [],
-        "strings": []
-    },
-    "FUN_004018a4": {
-        "score": 0,
-        "apis": [],
-        "strings": []
-    },
-    "FUN_00401908": {
-        "score": 0,
-        "apis": [],
-        "strings": []
-    },
-    "FUN_00401b6a": {
-        "score": 0,
-        "apis": [],
-        "strings": []
-    },
-    "FUN_00401aae": {
-        "score": 5,
-        "apis": [],
-        "strings": [
-            "Error: Invalid symbol %c\n\n",
-            "Error: Square already assigned %c\n\n",
-            "Error: Invalid symbol %c\\n\\n",
-            "Error: Square already assigned %c\\n\\n"
-        ]
-    },
-    "FUN_00401c61": {
-        "score": 2,
-        "apis": [
-            "toupper"
-        ],
-        "strings": [
-            "Error: Invalid input - Try again\n\n",
-            "Error: Invalid input - Try again\\n\\n",
-            "1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9\n\n",
-            "Provide a move for symbol %c:\\n\\n",
-            "Error: Square already filled by %c\n\n",
-            "1 | 2 | 3\\n4 | 5 | 6\\n7 | 8 | 9\\n\\n",
-            "Error: Square already filled by %c\\n\\n",
-            "Provide a move for symbol %c:\n\n"
-        ]
-    },
-    "FUN_00401db7": {
-        "score": 0,
-        "apis": [],
-        "strings": []
-    },
-    "main": {
-        "score": 999,
-        "apis": [],
-        "strings": [
-            "Draw!\\n\\n",
-            "%c victory!\\n\\n",
-            "\\x1b[1;1H\\x1b[2J"
-        ]
-    },
     "FUN_18011a7b0": {
         "score": 0,
         "apis": [],
@@ -84,11 +11,7 @@
     },
     "entry": {
         "score": 999,
-        "apis": [
-            "VirtualProtect",
-            "GetProcAddress",
-            "LoadLibraryA"
-        ],
+        "apis": [],
         "strings": []
     }
 }
