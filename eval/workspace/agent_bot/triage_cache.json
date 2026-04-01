@@ -1,0 +1,55 @@
+{
+    "FUN_00400360": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "entry": {
+        "score": 999,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_004003f0": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_00400400": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_00400430": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_004004a6": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_004004fd": {
+        "score": 0,
+        "apis": [],
+        "strings": []
+    },
+    "FUN_00400543": {
+        "score": 6,
+        "apis": [],
+        "strings": [
+            "Hello, %s! Score: %.2f",
+            "%s (len=%d)\\n"
+        ]
+    },
+    "FUN_004005d4": {
+        "score": 7,
+        "apis": [],
+        "strings": [
+            "TestUser",
+            "Usage: %s <password>\\n",
+            "Access denied.",
+            "Access granted!"
+        ]
+    }
+}

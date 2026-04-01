@@ -1,0 +1,155 @@
+{
+  "functions": {
+    "FUN_00400360": {
+      "address": "00400360",
+      "body": "void FUN_00400360(void)\n\n{\n  (*(code *)PTR_00402ff8)();\n  return;\n}",
+      "status": "ANALYZED",
+      "string_score": 0,
+      "is_wrapper": false,
+      "summary": "This function dereferences a function pointer located at address PTR_00402ff8 and calls the function it points to. This pattern is often used for dispatch tables or callbacks.",
+      "apis": [],
+      "strings": []
+    },
+    "entry": {
+      "address": "004003c0",
+      "body": "void processEntry entry(undefined8 param_1,undefined8 param_2)\n\n{\n  undefined1 auStack_8 [8];\n  \n  (*(code *)PTR___libc_start_main_00402fd8)\n            (FUN_004005d4,param_2,&stack0x00000008,0,0,param_1,auStack_8);\n  do {\n                    /* WARNING: Do nothing block with infinite loop */\n  } while( true );\n}",
+      "status": "ANALYZED",
+      "string_score": 999,
+      "is_wrapper": false,
+      "summary": "This function calls `authenticate_user` with `buffer_length` and `data_buffer` as arguments, along with some stack addresses, and then enters an infinite loop. The `PTR___libc_start_main_00402fd8` likely points to a pointer to `libc_start_main`, however it's unusual that authenticate user is passed as the main function.",
+      "apis": [],
+      "strings": []
+    },
+    "FUN_004003f0": {
+      "address": "004003f0",
+      "body": "void FUN_004003f0(void)\n\n{\n  return;\n}",
+      "status": "ANALYZED",
+      "string_score": 0,
+      "is_wrapper": false,
+      "summary": "This function is empty and simply returns. It serves no apparent purpose.",
+      "apis": [],
+      "strings": []
+    },
+    "FUN_00400400": {
+      "address": "00400400",
+      "body": "/* WARNING: Removing unreachable block (ram,0x0040040d) */\n/* WARNING: Removing unreachable block (ram,0x00400417) */\n\nvoid FUN_00400400(void)\n\n{\n  return;\n}",
+      "status": "ANALYZED",
+      "string_score": 0,
+      "is_wrapper": true,
+      "summary": "This function does nothing and immediately returns.",
+      "apis": [],
+      "strings": []
+    },
+    "FUN_00400430": {
+      "address": "00400430",
+      "body": "/* WARNING: Removing unreachable block (ram,0x0040044f) */\n/* WARNING: Removing unreachable block (ram,0x00400459) */\n\nvoid FUN_00400430(void)\n\n{\n  return;\n}",
+      "status": "ANALYZED",
+      "string_score": 0,
+      "is_wrapper": true,
+      "summary": "The function FUN_00400430 is an empty function that simply returns.",
+      "apis": [],
+      "strings": []
+    },
+    "FUN_004004a6": {
+      "address": "004004a6",
+      "body": "uint FUN_004004a6(long param_1,int param_2)\n\n{\n  undefined4 local_10;\n  undefined4 local_c;\n  \n  local_c = 0;\n  for (local_10 = 0; local_10 < param_2; local_10 = local_10 + 1) {\n    local_c = local_c ^ (int)*(char *)(param_1 + local_10);\n    local_c = (int)local_c >> 5 | local_c * 8;\n  }\n  return local_c;\n}",
+      "status": "ANALYZED",
+      "string_score": 0,
+      "is_wrapper": false,
+      "summary": "The function calculates a 32-bit hash of an input string (data buffer). It iterates through each byte of the buffer, XORs it with an accumulator, and then applies a custom bitwise mixing operation to the accumulator. The mixing operation consists of a signed right shift by 5 bits OR'd with a left shift by 3 bits.",
+      "apis": [],
+      "strings": []
+    },
+    "FUN_004004fd": {
+      "address": "004004fd",
+      "body": "bool FUN_004004fd(char *param_1)\n\n{\n  int iVar1;\n  size_t sVar2;\n  \n  sVar2 = strlen(param_1);\n  iVar1 = FUN_004004a6(param_1,sVar2 & 0xffffffff);\n  return iVar1 == -0x21524111;\n}",
+      "status": "ANALYZED",
+      "string_score": 0,
+      "is_wrapper": true,
+      "summary": "This function takes a string (likely a password) as input, calculates a hash using FUN_004004a6, and compares the hash to a hardcoded value (-0x21524111). It returns true if the calculated hash matches the expected value, indicating a valid password.",
+      "apis": [],
+      "strings": []
+    },
+    "FUN_00400543": {
+      "address": "00400543",
+      "body": "void FUN_00400543(long param_1)\n\n{\n  size_t sVar1;\n  char local_98 [140];\n  undefined4 local_c;\n  \n  local_c = 0;\n  snprintf(local_98,0x80,\"Hello, %s! Score: %.2f\",(double)*(float *)(param_1 + 0x44),param_1 + 4);\n  sVar1 = strlen(local_98);\n  local_c = (undefined4)sVar1;\n  printf(\"%s (len=%d)\\n\",local_98,sVar1 & 0xffffffff);\n  return;\n}",
+      "status": "ANALYZED",
+      "string_score": 6,
+      "is_wrapper": true,
+      "summary": "This function takes a pointer `param_1` to a data structure. It formats a string using the string \"Hello, %s! Score: %.2f\", where the first argument is a string at offset 0x44 of the data structure pointed to by `param_1` and the second argument is a float at offset 4 of the data structure. The formatted string is stored in `local_98`. The function then prints the string followed by its length to the console using printf. `local_c` is assigned the length of the printed string.",
+      "apis": [],
+      "strings": [
+        "Hello, %s! Score: %.2f",
+        "%s (len=%d)\\n"
+      ]
+    },
+    "FUN_004005d4": {
+      "address": "004005d4",
+      "body": "bool FUN_004005d4(int param_1,undefined8 *param_2)\n\n{\n  bool bVar1;\n  undefined4 local_58;\n  char acStack_54 [64];\n  undefined4 local_14;\n  int local_c;\n  \n  local_c = 0;\n  if (param_1 < 2) {\n    printf(\"Usage: %s <password>\\n\",*param_2);\n    bVar1 = true;\n  }\n  else {\n    local_58 = 1;\n    strncpy(acStack_54,\"TestUser\",0x40);\n    local_14 = DAT_004012bc;\n    local_c = FUN_004004fd(param_2[1]);\n    if (local_c == 0) {\n      puts(\"Access denied.\");\n    }\n    else {\n      local_14 = DAT_004012c0;\n      FUN_00400543(&local_58);\n      puts(\"Access granted!\");\n    }\n    bVar1 = local_c == 0;\n  }\n  return bVar1;\n}",
+      "status": "ANALYZED",
+      "string_score": 7,
+      "is_wrapper": false,
+      "summary": "This function authenticates a user by comparing the provided password against a stored hash. It takes the number of arguments and the argument vector as input. If fewer than 2 arguments are provided, it prints usage instructions. Otherwise, it sets a username to \"TestUser\", calls verify_password_hash with the provided password, and prints \"Access denied.\" or \"Access granted!\" based on the result. print_greeting_and_score is called if the authentication is successful.",
+      "apis": [],
+      "strings": [
+        "TestUser",
+        "Usage: %s <password>\\n",
+        "Access denied.",
+        "Access granted!"
+      ]
+    }
+  },
+  "symbol_table": {
+    "entry": "processEntry",
+    "acStack_54@FUN_004005d4": "username",
+    "param_1@FUN_004005d4": "argc",
+    "param_2@FUN_004005d4": "argv",
+    "local_c@FUN_004005d4": "auth_result",
+    "FUN_004005d4": "authenticate_user",
+    "iVar1@FUN_004004fd": "hash_value",
+    "sVar2@FUN_004004fd": "string_length",
+    "FUN_004004fd": "verify_password_hash",
+    "local_98@FUN_00400543": "formatted_string",
+    "local_c@FUN_00400543": "string_length",
+    "sVar1@FUN_00400543": "str_len",
+    "FUN_00400543": "print_greeting_and_score",
+    "FUN_00400360": "call_function_from_pointer",
+    "FUN_004003f0": "empty_function",
+    "FUN_00400400": "empty_function_00400400",
+    "FUN_00400430": "empty_function_00400430",
+    "param_1@FUN_004004a6": "input_string",
+    "param_2@FUN_004004a6": "string_length",
+    "local_10@FUN_004004a6": "i",
+    "local_c@FUN_004004a6": "hash_value",
+    "FUN_004004a6": "calculate_string_hash",
+    "param_1": "data_buffer",
+    "param_2": "buffer_length",
+    "local_10": "i",
+    "local_c": "hash_accumulator",
+    "param_2@entry": "length",
+    "local_58@FUN_004005d4": "score",
+    "local_14@FUN_004005d4": "unused_data",
+    "auth_result@FUN_004005d4": "is_authenticated",
+    "bVar1@FUN_004005d4": "is_access_denied"
+  },
+  "current_target": "FUN_004005d4",
+  "suggested_target": "FUN_004004fd",
+  "call_graph": {},
+  "history": [
+    "Ingested 9 target functions.",
+    "Processed entry -> processEntry (PARTIAL)",
+    "Processed FUN_004005d4 -> authenticate_user (PARTIAL)",
+    "Processed FUN_004004fd -> verify_password_hash (ANALYZED)",
+    "Processed FUN_00400543 -> print_greeting_and_score (ANALYZED)",
+    "Processed FUN_00400360 -> call_function_from_pointer (ANALYZED)",
+    "Processed FUN_004003f0 -> empty_function (ANALYZED)",
+    "Processed FUN_00400400 -> empty_function_00400400 (ANALYZED)",
+    "Processed FUN_00400430 -> empty_function_00400430 (ANALYZED)",
+    "Processed FUN_004004a6 -> hash_string (OBFUSCATED)",
+    "Analyzed FUN_004004a6",
+    "Processed entry -> processEntry (ANALYZED)",
+    "Processed FUN_004005d4 -> authenticate_user (ANALYZED)",
+    "Analysis Complete."
+  ],
+  "phase": "end"
+}

@@ -1,0 +1,344 @@
+{
+  "summary": {
+    "gt_functions": 6,
+    "gt_variables": 21,
+    "agent_function_renames": 8,
+    "agent_variable_renames": 23,
+    "overall_score": 0.4117
+  },
+  "function_recovery": {
+    "tiers": {
+      "exact": 0,
+      "normalised": 0,
+      "fuzzy": 1,
+      "partial": 0,
+      "no_match": 7,
+      "total_renamed": 8,
+      "pct_exact": 0.0,
+      "pct_normalised": 0.0,
+      "pct_fuzzy": 12.5,
+      "pct_partial": 0.0,
+      "pct_no_match": 87.5
+    },
+    "metrics": {
+      "exact": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "coverage": 0.1667
+      },
+      "any": {
+        "precision": 0.125,
+        "recall": 0.1667,
+        "f1": 0.1429,
+        "coverage": 0.1667
+      }
+    },
+    "matches": [
+      {
+        "placeholder": "FUN_004005d4",
+        "recovered": "authenticate_user",
+        "tier": null,
+        "closest_gt": "greet_player",
+        "similarity": 0.235
+      },
+      {
+        "placeholder": "FUN_004004fd",
+        "recovered": "verify_password_hash",
+        "tier": null,
+        "closest_gt": "validate_password",
+        "similarity": 0.45
+      },
+      {
+        "placeholder": "FUN_00400543",
+        "recovered": "print_greeting_and_score",
+        "tier": null,
+        "closest_gt": "greet_player",
+        "similarity": 0.292
+      },
+      {
+        "placeholder": "FUN_00400360",
+        "recovered": "call_function_from_pointer",
+        "tier": null,
+        "closest_gt": "calculate_checksum",
+        "similarity": 0.231
+      },
+      {
+        "placeholder": "FUN_004003f0",
+        "recovered": "empty_function",
+        "tier": null,
+        "closest_gt": "main",
+        "similarity": 0.214
+      },
+      {
+        "placeholder": "FUN_00400400",
+        "recovered": "empty_function_00400400",
+        "tier": null,
+        "closest_gt": "main",
+        "similarity": 0.13
+      },
+      {
+        "placeholder": "FUN_00400430",
+        "recovered": "empty_function_00400430",
+        "tier": null,
+        "closest_gt": "main",
+        "similarity": 0.13
+      },
+      {
+        "placeholder": "FUN_004004a6",
+        "recovered": "calculate_string_hash",
+        "tier": "fuzzy",
+        "closest_gt": "calculate_checksum",
+        "similarity": 0.476
+      }
+    ]
+  },
+  "variable_recovery": {
+    "tiers": {
+      "exact": 3,
+      "normalised": 0,
+      "fuzzy": 10,
+      "partial": 0,
+      "no_match": 10,
+      "total_renamed": 23,
+      "pct_exact": 13.0,
+      "pct_normalised": 0.0,
+      "pct_fuzzy": 43.5,
+      "pct_partial": 0.0,
+      "pct_no_match": 43.5
+    },
+    "metrics": {
+      "exact": {
+        "precision": 0.1304,
+        "recall": 0.1429,
+        "f1": 0.1364,
+        "coverage": 0.381
+      },
+      "any": {
+        "precision": 0.5652,
+        "recall": 0.619,
+        "f1": 0.5909,
+        "coverage": 0.381
+      }
+    },
+    "matches": [
+      {
+        "placeholder": "entry",
+        "recovered": "processEntry",
+        "tier": null,
+        "closest_gt": "result",
+        "similarity": 0.333
+      },
+      {
+        "placeholder": "acStack_54@FUN_004005d4",
+        "recovered": "username",
+        "tier": null,
+        "closest_gt": "length",
+        "similarity": 0.25
+      },
+      {
+        "placeholder": "param_1@FUN_004005d4",
+        "recovered": "argc",
+        "tier": "exact",
+        "closest_gt": "argc",
+        "similarity": 1.0
+      },
+      {
+        "placeholder": "param_2@FUN_004005d4",
+        "recovered": "argv",
+        "tier": "exact",
+        "closest_gt": "argv",
+        "similarity": 1.0
+      },
+      {
+        "placeholder": "local_c@FUN_004005d4",
+        "recovered": "auth_result",
+        "tier": "fuzzy",
+        "closest_gt": "result",
+        "similarity": 0.545
+      },
+      {
+        "placeholder": "iVar1@FUN_004004fd",
+        "recovered": "hash_value",
+        "tier": "fuzzy",
+        "closest_gt": "is_valid",
+        "similarity": 0.5
+      },
+      {
+        "placeholder": "sVar2@FUN_004004fd",
+        "recovered": "string_length",
+        "tier": "fuzzy",
+        "closest_gt": "length",
+        "similarity": 0.5
+      },
+      {
+        "placeholder": "local_98@FUN_00400543",
+        "recovered": "formatted_string",
+        "tier": null,
+        "closest_gt": "result",
+        "similarity": 0.188
+      },
+      {
+        "placeholder": "local_c@FUN_00400543",
+        "recovered": "string_length",
+        "tier": "fuzzy",
+        "closest_gt": "length",
+        "similarity": 0.5
+      },
+      {
+        "placeholder": "sVar1@FUN_00400543",
+        "recovered": "str_len",
+        "tier": "fuzzy",
+        "closest_gt": "msg_len",
+        "similarity": 0.571
+      },
+      {
+        "placeholder": "param_1@FUN_004004a6",
+        "recovered": "input_string",
+        "tier": "fuzzy",
+        "closest_gt": "input_local",
+        "similarity": 0.5
+      },
+      {
+        "placeholder": "param_2@FUN_004004a6",
+        "recovered": "string_length",
+        "tier": "fuzzy",
+        "closest_gt": "length",
+        "similarity": 0.5
+      },
+      {
+        "placeholder": "local_10@FUN_004004a6",
+        "recovered": "i",
+        "tier": null,
+        "closest_gt": "input",
+        "similarity": 0.2
+      },
+      {
+        "placeholder": "local_c@FUN_004004a6",
+        "recovered": "hash_value",
+        "tier": "fuzzy",
+        "closest_gt": "is_valid",
+        "similarity": 0.5
+      },
+      {
+        "placeholder": "param_1",
+        "recovered": "data_buffer",
+        "tier": "fuzzy",
+        "closest_gt": "buffer",
+        "similarity": 0.545
+      },
+      {
+        "placeholder": "param_2",
+        "recovered": "buffer_length",
+        "tier": "fuzzy",
+        "closest_gt": "length",
+        "similarity": 0.5
+      },
+      {
+        "placeholder": "local_10",
+        "recovered": "i",
+        "tier": null,
+        "closest_gt": "input",
+        "similarity": 0.2
+      },
+      {
+        "placeholder": "local_c",
+        "recovered": "hash_accumulator",
+        "tier": null,
+        "closest_gt": "result",
+        "similarity": 0.25
+      },
+      {
+        "placeholder": "param_2@entry",
+        "recovered": "length",
+        "tier": "exact",
+        "closest_gt": "length",
+        "similarity": 1.0
+      },
+      {
+        "placeholder": "local_58@FUN_004005d4",
+        "recovered": "score",
+        "tier": null,
+        "closest_gt": "sVar2",
+        "similarity": 0.4
+      },
+      {
+        "placeholder": "local_14@FUN_004005d4",
+        "recovered": "unused_data",
+        "tier": null,
+        "closest_gt": "password_local",
+        "similarity": 0.286
+      },
+      {
+        "placeholder": "auth_result@FUN_004005d4",
+        "recovered": "is_authenticated",
+        "tier": null,
+        "closest_gt": "is_valid",
+        "similarity": 0.333
+      },
+      {
+        "placeholder": "bVar1@FUN_004005d4",
+        "recovered": "is_access_denied",
+        "tier": null,
+        "closest_gt": "success",
+        "similarity": 0.375
+      }
+    ]
+  },
+  "per_function": {
+    "FUN_00400360": {
+      "status": "ANALYZED",
+      "recovered_func_name": "call_function_from_pointer",
+      "func_name_tier": null,
+      "summary": "This function dereferences a function pointer located at address PTR_00402ff8 and calls the function it points to. This pattern is often used for dispatch tables or callbacks."
+    },
+    "entry": {
+      "status": "ANALYZED",
+      "recovered_func_name": "processEntry",
+      "func_name_tier": null,
+      "summary": "This function calls `authenticate_user` with `buffer_length` and `data_buffer` as arguments, along with some stack addresses, and then enters an infinite loop. The `PTR___libc_start_main_00402fd8` likely points to a pointer to `libc_start_main`, however it's unusual that authenticate user is passed as the main function."
+    },
+    "FUN_004003f0": {
+      "status": "ANALYZED",
+      "recovered_func_name": "empty_function",
+      "func_name_tier": null,
+      "summary": "This function is empty and simply returns. It serves no apparent purpose."
+    },
+    "FUN_00400400": {
+      "status": "ANALYZED",
+      "recovered_func_name": "empty_function_00400400",
+      "func_name_tier": null,
+      "summary": "This function does nothing and immediately returns."
+    },
+    "FUN_00400430": {
+      "status": "ANALYZED",
+      "recovered_func_name": "empty_function_00400430",
+      "func_name_tier": null,
+      "summary": "The function FUN_00400430 is an empty function that simply returns."
+    },
+    "FUN_004004a6": {
+      "status": "ANALYZED",
+      "recovered_func_name": "calculate_string_hash",
+      "func_name_tier": "fuzzy",
+      "summary": "The function calculates a 32-bit hash of an input string (data buffer). It iterates through each byte of the buffer, XORs it with an accumulator, and then applies a custom bitwise mixing operation to the accumulator. The mixing operation consists of a signed right shift by 5 bits OR'd with a left shift by 3 bits."
+    },
+    "FUN_004004fd": {
+      "status": "ANALYZED",
+      "recovered_func_name": "verify_password_hash",
+      "func_name_tier": null,
+      "summary": "This function takes a string (likely a password) as input, calculates a hash using FUN_004004a6, and compares the hash to a hardcoded value (-0x21524111). It returns true if the calculated hash matches the expected value, indicating a valid password."
+    },
+    "FUN_00400543": {
+      "status": "ANALYZED",
+      "recovered_func_name": "print_greeting_and_score",
+      "func_name_tier": null,
+      "summary": "This function takes a pointer `param_1` to a data structure. It formats a string using the string \"Hello, %s! Score: %.2f\", where the first argument is a string at offset 0x44 of the data structure pointed to by `param_1` and the second argument is a float at offset 4 of the data structure. The formatted string is stored in `local_98`. The function then prints the string followed by its length to the console using printf. `local_c` is assigned the length of the printed string."
+    },
+    "FUN_004005d4": {
+      "status": "ANALYZED",
+      "recovered_func_name": "authenticate_user",
+      "func_name_tier": null,
+      "summary": "This function authenticates a user by comparing the provided password against a stored hash. It takes the number of arguments and the argument vector as input. If fewer than 2 arguments are provided, it prints usage instructions. Otherwise, it sets a username to \"TestUser\", calls verify_password_hash with the provided password, and prints \"Access denied.\" or \"Access granted!\" based on the result. print_greeting_and_score is called if the authentication is successful."
+    }
+  }
+}

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REtard Eval Report – /run/media/saiyansai/Drive/REtard/eval/test_sample.c</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f9fafb;
+          color: #111827; line-height: 1.6; }
+  header { background: #111827; color: #f9fafb; padding: 1.5rem 2rem; }
+  header h1 { font-size: 1.6rem; }
+  header p  { color: #9ca3af; font-size: 0.9rem; }
+  main { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+  .section { background: #fff; border-radius: 10px; padding: 1.5rem;
+              margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+  h2 { font-size: 1.2rem; margin-bottom: 1rem; color: #1f2937;
+        border-bottom: 2px solid #e5e7eb; padding-bottom: .5rem; }
+  h3 { font-size: 1rem; margin: 1rem 0 .5rem; color: #374151; }
+  .gauges { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+                gap: 1rem; margin-bottom: 1rem; }
+  .stat-card { background:#f3f4f6; border-radius:8px; padding:.75rem 1rem; }
+  .stat-card .val { font-size:1.5rem; font-weight:700; }
+  .stat-card .lbl { font-size:.8rem; color:#6b7280; }
+  .table-wrap { overflow-x: auto; }
+  table { width:100%; border-collapse:collapse; font-size:.85rem; }
+  th { background:#f3f4f6; padding:.5rem .75rem; text-align:left;
+        font-size:.78rem; text-transform:uppercase; color:#6b7280;
+        border-bottom:2px solid #e5e7eb; }
+  td { padding:.45rem .75rem; border-bottom:1px solid #f3f4f6; vertical-align:top; }
+  tr:hover td { background:#f9fafb; }
+  code { background:#f3f4f6; padding:.1rem .3rem; border-radius:3px;
+          font-family:monospace; font-size:.82em; }
+  .badge { display:inline-block; padding:.1rem .5rem; border-radius:999px;
+            font-size:.7rem; font-weight:600; text-transform:uppercase; }
+  .badge-analyzed   { background:#dcfce7; color:#166534; }
+  .badge-pending    { background:#fef9c3; color:#854d0e; }
+  .badge-partial    { background:#fff7ed; color:#9a3412; }
+  .badge-obfuscated { background:#fce7f3; color:#9d174d; }
+  .badge-partial_end{ background:#fee2e2; color:#991b1b; }
+  footer { text-align:center; color:#9ca3af; font-size:.8rem; padding:2rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🔍 REtard Evaluation Report</h1>
+  <p>Source: <strong>/run/media/saiyansai/Drive/REtard/eval/test_sample.c</strong> &nbsp;|&nbsp; Generated: 2026-03-24 14:32:12</p>
+</header>
+<main>
+
+<!-- Summary gauges -->
+<div class="section">
+  <h2>Overall Performance</h2>
+  <div class="gauges">
+<svg width="110" height="110" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="10"/>
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#f97316" stroke-width="10"
+    stroke-dasharray="103.47 251.33"
+    stroke-dashoffset="62.83"
+    transform="rotate(-90 50 50)"/>
+  <text x="50" y="48" text-anchor="middle" dominant-baseline="middle"
+        font-size="14" font-weight="bold" fill="#f97316">41.2%</text>
+  <text x="50" y="64" text-anchor="middle" dominant-baseline="middle"
+        font-size="8" fill="#6b7280">Overall Score</text>
+</svg>
+<svg width="110" height="110" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="10"/>
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#ef4444" stroke-width="10"
+    stroke-dasharray="35.91 251.33"
+    stroke-dashoffset="62.83"
+    transform="rotate(-90 50 50)"/>
+  <text x="50" y="48" text-anchor="middle" dominant-baseline="middle"
+        font-size="14" font-weight="bold" fill="#ef4444">14.3%</text>
+  <text x="50" y="64" text-anchor="middle" dominant-baseline="middle"
+        font-size="8" fill="#6b7280">Func F1</text>
+</svg>
+<svg width="110" height="110" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="10"/>
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#ef4444" stroke-width="10"
+    stroke-dasharray="31.42 251.33"
+    stroke-dashoffset="62.83"
+    transform="rotate(-90 50 50)"/>
+  <text x="50" y="48" text-anchor="middle" dominant-baseline="middle"
+        font-size="14" font-weight="bold" fill="#ef4444">12.5%</text>
+  <text x="50" y="64" text-anchor="middle" dominant-baseline="middle"
+        font-size="8" fill="#6b7280">Func Precision</text>
+</svg>
+<svg width="110" height="110" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="10"/>
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#ef4444" stroke-width="10"
+    stroke-dasharray="41.90 251.33"
+    stroke-dashoffset="62.83"
+    transform="rotate(-90 50 50)"/>
+  <text x="50" y="48" text-anchor="middle" dominant-baseline="middle"
+        font-size="14" font-weight="bold" fill="#ef4444">16.7%</text>
+  <text x="50" y="64" text-anchor="middle" dominant-baseline="middle"
+        font-size="8" fill="#6b7280">Func Recall</text>
+</svg>
+<svg width="110" height="110" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="10"/>
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#eab308" stroke-width="10"
+    stroke-dasharray="148.51 251.33"
+    stroke-dashoffset="62.83"
+    transform="rotate(-90 50 50)"/>
+  <text x="50" y="48" text-anchor="middle" dominant-baseline="middle"
+        font-size="14" font-weight="bold" fill="#eab308">59.1%</text>
+  <text x="50" y="64" text-anchor="middle" dominant-baseline="middle"
+        font-size="8" fill="#6b7280">Var F1</text>
+</svg>
+<svg width="110" height="110" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="10"/>
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#eab308" stroke-width="10"
+    stroke-dasharray="142.05 251.33"
+    stroke-dashoffset="62.83"
+    transform="rotate(-90 50 50)"/>
+  <text x="50" y="48" text-anchor="middle" dominant-baseline="middle"
+        font-size="14" font-weight="bold" fill="#eab308">56.5%</text>
+  <text x="50" y="64" text-anchor="middle" dominant-baseline="middle"
+        font-size="8" fill="#6b7280">Var Precision</text>
+</svg>
+<svg width="110" height="110" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="10"/>
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#eab308" stroke-width="10"
+    stroke-dasharray="155.57 251.33"
+    stroke-dashoffset="62.83"
+    transform="rotate(-90 50 50)"/>
+  <text x="50" y="48" text-anchor="middle" dominant-baseline="middle"
+        font-size="14" font-weight="bold" fill="#eab308">61.9%</text>
+  <text x="50" y="64" text-anchor="middle" dominant-baseline="middle"
+        font-size="8" fill="#6b7280">Var Recall</text>
+</svg></div>
+</div>
+
+<!-- Inventory stats -->
+<div class="section">
+  <h2>Inventory</h2>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="val">6</div>
+      <div class="lbl">Ground-truth functions</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">21</div>
+      <div class="lbl">Ground-truth variables</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">8</div>
+      <div class="lbl">Functions renamed by agent</div>
+    </div>
+    <div class="stat-card">
+      <div class="val">23</div>
+      <div class="lbl">Variables renamed by agent</div>
+    </div>
+    <div class="stat-card">
+      <div class="val" style="color:#f97316">41.2%</div>
+      <div class="lbl">Overall Score (weighted F1)</div>
+    </div>
+  </div>
+</div>
+
+<!-- Function recovery -->
+<div class="section">
+  <h2>Function Name Recovery</h2>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="val">12.5%</div><div class="lbl">Precision (any tier)</div></div>
+    <div class="stat-card"><div class="val">16.7%</div><div class="lbl">Recall (any tier)</div></div>
+    <div class="stat-card"><div class="val">14.3%</div><div class="lbl">F1 (any tier)</div></div>
+    <div class="stat-card"><div class="val">16.7%</div><div class="lbl">Coverage</div></div>
+    <div class="stat-card"><div class="val">0.0%</div><div class="lbl">Exact matches</div></div>
+  </div>
+  <h3>Match distribution</h3>
+  
+<div style="height:20px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+  <div style="width:12.5%;background:#eab308;height:100%;display:inline-block;vertical-align:top;title="fuzzy: 1"></div><div style="width:87.5%;background:#ef4444;height:100%;display:inline-block;vertical-align:top;title="no_match: 7"></div>
+</div>
+<small style="color:#6b7280"><span style="color:#eab308">■</span> fuzzy <span style="color:#ef4444">■</span> no_match</small>
+  
+  <h3>Function Name Matches</h3>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Placeholder (Ghidra)</th>
+        <th>Recovered Name</th>
+        <th>Match Tier</th>
+        <th>Closest GT Name</th>
+        <th>Similarity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>FUN_004004a6</code></td>
+        <td><strong>calculate_string_hash</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td>calculate_checksum</td>
+        <td>47.60%</td>
+      </tr>
+      <tr>
+        <td><code>FUN_00400360</code></td>
+        <td><strong>call_function_from_pointer</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>calculate_checksum</td>
+        <td>23.10%</td>
+      </tr>
+      <tr>
+        <td><code>FUN_004003f0</code></td>
+        <td><strong>empty_function</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>main</td>
+        <td>21.40%</td>
+      </tr>
+      <tr>
+        <td><code>FUN_00400400</code></td>
+        <td><strong>empty_function_00400400</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>main</td>
+        <td>13.00%</td>
+      </tr>
+      <tr>
+        <td><code>FUN_00400430</code></td>
+        <td><strong>empty_function_00400430</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>main</td>
+        <td>13.00%</td>
+      </tr>
+      <tr>
+        <td><code>FUN_004004fd</code></td>
+        <td><strong>verify_password_hash</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>validate_password</td>
+        <td>45.00%</td>
+      </tr>
+      <tr>
+        <td><code>FUN_00400543</code></td>
+        <td><strong>print_greeting_and_score</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>greet_player</td>
+        <td>29.20%</td>
+      </tr>
+      <tr>
+        <td><code>FUN_004005d4</code></td>
+        <td><strong>authenticate_user</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>greet_player</td>
+        <td>23.50%</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- Variable recovery -->
+<div class="section">
+  <h2>Variable Name Recovery</h2>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="val">56.5%</div><div class="lbl">Precision (any tier)</div></div>
+    <div class="stat-card"><div class="val">61.9%</div><div class="lbl">Recall (any tier)</div></div>
+    <div class="stat-card"><div class="val">59.1%</div><div class="lbl">F1 (any tier)</div></div>
+    <div class="stat-card"><div class="val">38.1%</div><div class="lbl">Coverage</div></div>
+    <div class="stat-card"><div class="val">13.0%</div><div class="lbl">Exact matches</div></div>
+  </div>
+  <h3>Match distribution</h3>
+  
+<div style="height:20px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+  <div style="width:13.0%;background:#22c55e;height:100%;display:inline-block;vertical-align:top;title="exact: 3"></div><div style="width:43.5%;background:#eab308;height:100%;display:inline-block;vertical-align:top;title="fuzzy: 10"></div><div style="width:43.5%;background:#ef4444;height:100%;display:inline-block;vertical-align:top;title="no_match: 10"></div>
+</div>
+<small style="color:#6b7280"><span style="color:#22c55e">■</span> exact <span style="color:#eab308">■</span> fuzzy <span style="color:#ef4444">■</span> no_match</small>
+  
+  <h3>Variable Name Matches</h3>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Placeholder (Ghidra)</th>
+        <th>Recovered Name</th>
+        <th>Match Tier</th>
+        <th>Closest GT Name</th>
+        <th>Similarity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>param_1@FUN_004005d4</code></td>
+        <td><strong>argc</strong></td>
+        <td style="color:#22c55e;font-weight:bold">✔ Exact</td>
+        <td>argc</td>
+        <td>100.00%</td>
+      </tr>
+      <tr>
+        <td><code>param_2@FUN_004005d4</code></td>
+        <td><strong>argv</strong></td>
+        <td style="color:#22c55e;font-weight:bold">✔ Exact</td>
+        <td>argv</td>
+        <td>100.00%</td>
+      </tr>
+      <tr>
+        <td><code>param_2@entry</code></td>
+        <td><strong>length</strong></td>
+        <td style="color:#22c55e;font-weight:bold">✔ Exact</td>
+        <td>length</td>
+        <td>100.00%</td>
+      </tr>
+      <tr>
+        <td><code>iVar1@FUN_004004fd</code></td>
+        <td><strong>hash_value</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td>is_valid</td>
+        <td>50.00%</td>
+      </tr>
+      <tr>
+        <td><code>local_c@FUN_004004a6</code></td>
+        <td><strong>hash_value</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td>is_valid</td>
+        <td>50.00%</td>
+      </tr>
+      <tr>
+        <td><code>local_c@FUN_00400543</code></td>
+        <td><strong>string_length</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td>length</td>
+        <td>50.00%</td>
+      </tr>
+      <tr>
+        <td><code>local_c@FUN_004005d4</code></td>
+        <td><strong>auth_result</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td>result</td>
+        <td>54.50%</td>
+      </tr>
+      <tr>
+        <td><code>param_1</code></td>
+        <td><strong>data_buffer</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td>buffer</td>
+        <td>54.50%</td>
+      </tr>
+      <tr>
+        <td><code>param_1@FUN_004004a6</code></td>
+        <td><strong>input_string</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td>input_local</td>
+        <td>50.00%</td>
+      </tr>
+      <tr>
+        <td><code>param_2</code></td>
+        <td><strong>buffer_length</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td>length</td>
+        <td>50.00%</td>
+      </tr>
+      <tr>
+        <td><code>param_2@FUN_004004a6</code></td>
+        <td><strong>string_length</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td>length</td>
+        <td>50.00%</td>
+      </tr>
+      <tr>
+        <td><code>sVar1@FUN_00400543</code></td>
+        <td><strong>str_len</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td>msg_len</td>
+        <td>57.10%</td>
+      </tr>
+      <tr>
+        <td><code>sVar2@FUN_004004fd</code></td>
+        <td><strong>string_length</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td>length</td>
+        <td>50.00%</td>
+      </tr>
+      <tr>
+        <td><code>acStack_54@FUN_004005d4</code></td>
+        <td><strong>username</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>length</td>
+        <td>25.00%</td>
+      </tr>
+      <tr>
+        <td><code>auth_result@FUN_004005d4</code></td>
+        <td><strong>is_authenticated</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>is_valid</td>
+        <td>33.30%</td>
+      </tr>
+      <tr>
+        <td><code>bVar1@FUN_004005d4</code></td>
+        <td><strong>is_access_denied</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>success</td>
+        <td>37.50%</td>
+      </tr>
+      <tr>
+        <td><code>entry</code></td>
+        <td><strong>processEntry</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>result</td>
+        <td>33.30%</td>
+      </tr>
+      <tr>
+        <td><code>local_10</code></td>
+        <td><strong>i</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>input</td>
+        <td>20.00%</td>
+      </tr>
+      <tr>
+        <td><code>local_10@FUN_004004a6</code></td>
+        <td><strong>i</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>input</td>
+        <td>20.00%</td>
+      </tr>
+      <tr>
+        <td><code>local_14@FUN_004005d4</code></td>
+        <td><strong>unused_data</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>password_local</td>
+        <td>28.60%</td>
+      </tr>
+      <tr>
+        <td><code>local_58@FUN_004005d4</code></td>
+        <td><strong>score</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>sVar2</td>
+        <td>40.00%</td>
+      </tr>
+      <tr>
+        <td><code>local_98@FUN_00400543</code></td>
+        <td><strong>formatted_string</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>result</td>
+        <td>18.80%</td>
+      </tr>
+      <tr>
+        <td><code>local_c</code></td>
+        <td><strong>hash_accumulator</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td>result</td>
+        <td>25.00%</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- Per-function -->
+<div class="section">
+  <h2>Per-function Breakdown</h2>
+  
+  <h3>Per-function Breakdown</h3>
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Placeholder</th><th>Recovered Name</th>
+        <th>Name Match Tier</th><th>Agent Status</th><th>Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>FUN_00400360</code></td>
+        <td><strong>call_function_from_pointer</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td><span class="badge badge-analyzed">ANALYZED</span></td>
+        <td style="font-size:0.8em;color:#6b7280">This function dereferences a function pointer located at address PTR_00402ff8 and calls the function it points to. This </td>
+      </tr>
+      <tr>
+        <td><code>FUN_004003f0</code></td>
+        <td><strong>empty_function</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td><span class="badge badge-analyzed">ANALYZED</span></td>
+        <td style="font-size:0.8em;color:#6b7280">This function is empty and simply returns. It serves no apparent purpose.</td>
+      </tr>
+      <tr>
+        <td><code>FUN_00400400</code></td>
+        <td><strong>empty_function_00400400</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td><span class="badge badge-analyzed">ANALYZED</span></td>
+        <td style="font-size:0.8em;color:#6b7280">This function does nothing and immediately returns.</td>
+      </tr>
+      <tr>
+        <td><code>FUN_00400430</code></td>
+        <td><strong>empty_function_00400430</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td><span class="badge badge-analyzed">ANALYZED</span></td>
+        <td style="font-size:0.8em;color:#6b7280">The function FUN_00400430 is an empty function that simply returns.</td>
+      </tr>
+      <tr>
+        <td><code>FUN_004004a6</code></td>
+        <td><strong>calculate_string_hash</strong></td>
+        <td style="color:#eab308;font-weight:bold">~ Fuzzy</td>
+        <td><span class="badge badge-analyzed">ANALYZED</span></td>
+        <td style="font-size:0.8em;color:#6b7280">The function calculates a 32-bit hash of an input string (data buffer). It iterates through each byte of the buffer, XOR</td>
+      </tr>
+      <tr>
+        <td><code>FUN_004004fd</code></td>
+        <td><strong>verify_password_hash</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td><span class="badge badge-analyzed">ANALYZED</span></td>
+        <td style="font-size:0.8em;color:#6b7280">This function takes a string (likely a password) as input, calculates a hash using FUN_004004a6, and compares the hash t</td>
+      </tr>
+      <tr>
+        <td><code>FUN_00400543</code></td>
+        <td><strong>print_greeting_and_score</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td><span class="badge badge-analyzed">ANALYZED</span></td>
+        <td style="font-size:0.8em;color:#6b7280">This function takes a pointer `param_1` to a data structure. It formats a string using the string "Hello, %s! Score: %.2</td>
+      </tr>
+      <tr>
+        <td><code>FUN_004005d4</code></td>
+        <td><strong>authenticate_user</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td><span class="badge badge-analyzed">ANALYZED</span></td>
+        <td style="font-size:0.8em;color:#6b7280">This function authenticates a user by comparing the provided password against a stored hash. It takes the number of argu</td>
+      </tr>
+      <tr>
+        <td><code>entry</code></td>
+        <td><strong>processEntry</strong></td>
+        <td style="color:#ef4444;font-weight:bold">✘ No match</td>
+        <td><span class="badge badge-analyzed">ANALYZED</span></td>
+        <td style="font-size:0.8em;color:#6b7280">This function calls `authenticate_user` with `buffer_length` and `data_buffer` as arguments, along with some stack addre</td>
+      </tr></tbody>
+  </table>
+  </div>
+</div>
+
+</main>
+<footer>REtard Automated Evaluation Framework</footer>
+</body>
+</html>

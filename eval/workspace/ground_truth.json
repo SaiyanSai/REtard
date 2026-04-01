@@ -1,0 +1,88 @@
+{
+  "all_function_names": [
+    "_dl_relocate_static_pie",
+    "calculate_checksum",
+    "greet_player",
+    "main",
+    "snprintf",
+    "validate_password"
+  ],
+  "all_variable_names": [
+    "argc",
+    "argc_local",
+    "argv",
+    "argv_local",
+    "buffer",
+    "checksum",
+    "expected",
+    "index",
+    "input",
+    "input_local",
+    "is_valid",
+    "length",
+    "length_local",
+    "msg_len",
+    "password",
+    "password_local",
+    "player",
+    "result",
+    "sVar1",
+    "sVar2",
+    "success"
+  ],
+  "functions": {
+    "main": {
+      "params": [
+        "argc",
+        "argv"
+      ],
+      "locals": [
+        "success",
+        "argv_local",
+        "argc_local"
+      ]
+    },
+    "greet_player": {
+      "params": [
+        "player"
+      ],
+      "locals": [
+        "buffer",
+        "msg_len",
+        "sVar1"
+      ]
+    },
+    "snprintf": {
+      "params": [],
+      "locals": []
+    },
+    "validate_password": {
+      "params": [
+        "password"
+      ],
+      "locals": [
+        "expected",
+        "result",
+        "is_valid",
+        "sVar2",
+        "password_local"
+      ]
+    },
+    "calculate_checksum": {
+      "params": [
+        "input",
+        "length"
+      ],
+      "locals": [
+        "checksum",
+        "index",
+        "length_local",
+        "input_local"
+      ]
+    },
+    "_dl_relocate_static_pie": {
+      "params": [],
+      "locals": []
+    }
+  }
+}
